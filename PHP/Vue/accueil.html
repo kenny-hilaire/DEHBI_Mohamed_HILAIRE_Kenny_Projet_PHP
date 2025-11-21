@@ -9,7 +9,10 @@
 <body>
 
     <header>
-        <h1>Gestion d'une équipe de sport</h1>
+        <nav>
+            <a href=""><img src="logo.png" alt=""</a>
+            <p>Bienvenue dans votre application de gestion de basket</p>
+        </nav>
     </header>
 
     <section class="intro">
