@@ -13,7 +13,6 @@
                <th><label for="Adversaire">Adversaire</label></th>
                <th><label for="Lieu">Lieu</label></th>
                <th><label for="Résultat">Résultat</label></th>
-               <th><label for="Statut">Statut</label></th>
                </tr>
         </table>
 
