@@ -1,8 +1,8 @@
 # DEHBI_Mohamed_HILAIRE_Kenny_Projet_PHP _ Projet PHP sur la gestion d'une équipe de basket
-Lien vers le git: https://github.com/kenny-hilaire/DEHBI_Mohamed_HILAIRE_Kenny_Projet_PHP
+<h1> Lien vers le git: https://github.com/kenny-hilaire/DEHBI_Mohamed_HILAIRE_Kenny_Projet_PHP </h1>
 
-dechiffrement du sujet
-preparer le github pour le travail
-la creation de MCD
-la creation de repertoire PHP /Vue Controleur Model
-commancer a faire la page afficher.php
+<p> dechiffrement du sujet <br>
+preparer le github pour le travail <br>
+la creation de MCD <br>
+la creation de repertoire PHP /Vue Controleur Model <br>
+commancer a faire la page afficher.php <br>
