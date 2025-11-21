@@ -1,0 +1,84 @@
+/* Réinitialisation basique */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Body : fond clair + centrage du contenu */
+body {
+    background: linear-gradient(135deg, #1e1e2f, #2a2a48);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+/* Zone de connexion */
+.container {
+    background: rgba(255, 255, 255, 0.08);
+    padding: 40px;
+    border-radius: 12px;
+    width: 380px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(6px);
+}
+
+/* Titre */
+.container h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 1.8rem;
+    color: #ffffff;
+}
+
+/* Labels */
+.container label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 1rem;
+}
+
+/* Inputs */
+.container input[type="text"],
+.container input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+.container input::placeholder {
+    color: #ddd;
+}
+
+/* Bouton */
+.container button {
+    width: 100%;
+    padding: 12px;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 6px;
+    background: #4a62ff;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.container button:hover {
+    background: #3549e0;
+}
+
+/* Barre du haut */
+nav {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 1.2rem;
+    color: #ccc;
+}
