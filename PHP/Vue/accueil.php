@@ -10,24 +10,37 @@
 
     <header>
         <nav>
-            <a href="#"><img src="PHOTO/logo.png" alt="" class="logo"></a>
+            <a href="#"><img src="PHOTO/téléchargement-removebg-preview.png" alt="" class="logo"></a>
         </nav>
     </header>
 
 
     <section class="Introduction">
-        <h1>Bienvenue dans votre application de gestion d'equipe</h2>
+        <h1>Ici <span class="auto-typing"></span></h2>
         <ul>
-            <li>Gérer votre équipe comme un vrai pro </li>
-            <li>Prenez les meilleurs décision pour mener votre equipe à la victoire</li>
-            <li>Optimisez votre stratégie match après match</li>
-            <li>Votre equipe, vos choix, vos victoire</li>
+            <li>Gérer votre équipe comme un vrai pro </li><br>
+            <li>Prenez les meilleurs décision pour mener votre equipe à la victoire</li><br>
+            <li>Optimisez votre stratégie match après match</li><br>
+            <li>Votre equipe, vos choix, vos victoire</li><br>
         </ul>
-        <input type="button" name="Connexion" value="Connexion">
+        <form action="Connexion.html">
+            <button type="submit">Connexion</button>
+        </form>
 
     </section>
     <!-- L'image de fond sera gérée par la div .overlay -->
     <div class="overlay"></div>
-
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <script>
+        let typed= new Typed('.auto-typing', {
+            strings: ['Gérez', "Optimisez", "Bienvenue dans votre application de gestion d'equipe"],
+            typeSpeed: 100,
+            backSpeed: 100,
+            loop: true,
+            fadeOut: true,
+            fadeOutClass: 'typed-fade-out',
+            fadeOutDelay: 500
+        })
+    </script>
 </body>
 </html>
