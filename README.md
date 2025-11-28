@@ -1,4 +1,9 @@
 # DEHBI_Mohamed_HILAIRE_Kenny_Projet_PHP _ Projet PHP sur la gestion d'une équipe de basket
+utilisataire de phpmyAdmin avec alwayData:
+User : hilaire
+mdp: PhpProject2025*
+
+
 <h1> Lien vers le git: https://github.com/kenny-hilaire/DEHBI_Mohamed_HILAIRE_Kenny_Projet_PHP </h1>
 
 <p> dechiffrement du sujet <br>

@@ -1,19 +1,4 @@
-<?php
-$user = 'etu';
-$pass = 'basketTeam';
-
-	//1. Connnexion aux serveur SQL
-	
-		try {
-			$linkpdo = new PDO("mysql:host=localhost;dbname=basketball;charset=utf8", $user, $pass);
-		}
-		//2. capture erreur eventuelles
-		catch (Exception $e){
-		die('Erreur : ' . $e->getMessage());
-		}
-		
-
-        $check = $linkpdo -> prepare("CREATE TABLE Joueur(
+CREATE TABLE Joueur(
    Id_Joueur VARCHAR(50),
    nom VARCHAR(50),
    prenom VARCHAR(50),
@@ -56,4 +41,3 @@ CREATE TABLE Participe(
    FOREIGN KEY(Id_Joueur) REFERENCES Joueur(Id_Joueur),
    FOREIGN KEY(Id_Match) REFERENCES Match_(Id_Match)
 );
- ")
