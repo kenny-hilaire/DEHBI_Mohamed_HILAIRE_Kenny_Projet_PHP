@@ -7,7 +7,7 @@
 </head>
 <body>
     <form action="" methode="POST">
-        <label for="matche">Ajouter un match :</label><br><br>
+        <label for="matche">modifier le matche :</label><br><br>
         <label for="DateM">Date de matche :</label>
         <input type="Date" id="DateM" name="DateM" required><br><br>
         <label for="HeureM">Heure de matche : </label>
