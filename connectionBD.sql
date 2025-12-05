@@ -21,14 +21,7 @@ CREATE TABLE Match_(
    PRIMARY KEY(Id_Match)
 );
 
-CREATE TABLE Commentaire(
-   Id_Commentaire VARCHAR(50),
-   notes_perso VARCHAR(50),
-   date_comm DATE,
-   Id_Joueur VARCHAR(50) NOT NULL,
-   PRIMARY KEY(Id_Commentaire),
-   FOREIGN KEY(Id_Joueur) REFERENCES Joueur(Id_Joueur)
-);
+
 
 CREATE TABLE Participe(
    Id_Joueur VARCHAR(50),
@@ -40,4 +33,10 @@ CREATE TABLE Participe(
    PRIMARY KEY(Id_Joueur, Id_Match),
    FOREIGN KEY(Id_Joueur) REFERENCES Joueur(Id_Joueur),
    FOREIGN KEY(Id_Match) REFERENCES Match_(Id_Match)
+);
+
+CREATE TBALE Commentaire(
+   Id_Commentaire VARCHAR(50),
+   notes_perso VARCHAR(50),
+   date_comm   DATE
 );
