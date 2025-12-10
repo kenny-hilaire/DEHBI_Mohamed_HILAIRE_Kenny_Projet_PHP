@@ -1,5 +1,5 @@
 <?php
-calss Joueur {
+class Joueur {
     private $Id_Joueur;
     private  $nom;
     private $prenom;
