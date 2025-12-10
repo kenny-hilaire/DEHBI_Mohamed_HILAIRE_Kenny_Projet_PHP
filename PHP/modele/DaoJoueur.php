@@ -1,7 +1,7 @@
 <?php
 require_once 'Joueur.php'; // ✅ Important pour que Contact soit reconnu
 
-class ContactDAO{
+class JoueurDAO{
     private $pdo;
 
     public function __construct(){
@@ -12,69 +12,59 @@ class ContactDAO{
      }
 }
 
-public function insert(Contact $c){
+public function insert(Joueur $c){
      $req = $this->pdo->prepare('
-            INSERT INTO joueur (Id_Joueur, nom , prenom, numéro_licence, date_naissance, taille, poids,statut,poste_préferer)
+            INSERT INTO joueur (Id_Joueur, nom , prenom, numero_licence, date_naissance, taille, poids,statut,poste_preferer)
             VALUES (:Id_Joueur and :nom and :prenom and
-             :numéro_licence and :date_naissance
-             and :taille and :poids and :statut and :poste_préferer)
+             :numero_licence and :date_naissance
+             and :taille and :poids and :statut and :poste_preferer)
         ');
         // à modifier
         $req->execute([
             'nom' => $c->getNom(),
             'prenom' => $c->getPrenom(),
-            'adresse' => $c->getAdresse(),
-            'code_postale' => $c->getCodePostale(),
-            'ville' => $c->getVille(),
-            'telephone' => $c->getTelephone()
+            'Id_Joueur' => $c->getId_Joueur(),
+            'numero_licence' => $c->getNumLicence(),
+            'date_naissance' => $c->getDateNaissance(),
+            'taille' => $c->getTaille(),
+            'poids' => $c->getPoids(),
+            'statut' => $c->getStatut(),
+            'poste_preferer'=> $c->getPoste_Preferer()
         ]);
 }
 
-public function updateInfo(Contact $ancien, $nouveauNom, $nouveauPrenom){
+public function updateInfo(Joueur $joueur, String $nouveauStatut, String $nouveauPostePref, float $nouvelleTaille, float $nouveauPoids ){
         $req = $this->pdo->prepare("
             UPDATE contact
-            SET nom = :nouveauNom, prenom = :nouveauPrenom
-            WHERE nom = :ancienNom AND prenom = :ancienPrenom
+            SET statut = :nouveauStatut, poste_preferer = :nouveauPostePref, taille = :nouvelleTaille, poids = :nouveauPoids
+            WHERE numero_licence = :numLicence 
         ");
         $req->execute([
-            'nouveauNom' => $nouveauNom,
-            'nouveauPrenom' =>$nouveauPrenom,
-            'ancienNom' => $ancien->getNom(),
-            'ancienPrenom' => $ancien->getPrenom()
+            'Id_Joueur' => $joueur->getId_Joueur,
+            'nouveauStatut' =>$nouveauStatut,
+            'taille' => $nouvelleTaille,
+            'poste_preferer' => $nouveauPostePref, 
+            'poids' => $nouveauPoids
         ]);
 }
 
-    public function updateCoordonne($telephone, $adresse, $code_postale, $ville){
-          $req = $this->pdo->prepare('
-            UPDATE contact
-            SET adresse = :adresse, code_postale = :code_postale, ville = :ville
-            WHERE telephone = :telephone
-        ');
-        return $req->execute([
-            'adresse' => $adresse,
-            'code_postale' => $code_postale,
-            'ville' => $ville,
-            'telephone' => $telephone
-        ]);
-    }
-
-    public function delete(Contact $contact){
-        $sup = $this->pdo->prepare("delete from contact where telephone = :telephone");
+    public function delete(Joueur $joueur){
+        $sup = $this->pdo->prepare("delete from Joueur where Id_Joueur = :Id_Joueur");
     $sup -> execute([
-	':telephone' => $contact->getTelephone()]);
+	':Id_Joueur' => $joueur->getId_Joueur]);
     }
 
 
-    public function select($motCle){
-         $req = $this->pdo->prepare("select * from contact where nom like :mc1 or prenom like :mc1 or telephone like :mc1 or adresse like :mc1 or code_postale like :mc1 or ville like :mc1;");
-		$req ->execute(['mc1' => "%$motCle%"]);
+    public function select(Joueur $j){
+         $req = $this->pdo->prepare("select * from Joueur where Id_Joueur ;");
+		$req ->execute(['Id_Joueur' => $j->getId_Joueur]);
     return $req->fetchAll(PDO::FETCH_ASSOC);
     }
 
 
 
     public function obtenirTous() {
-        $req = $this->pdo->query('SELECT * FROM contact ORDER BY nom, prenom');
+        $req = $this->pdo->query('SELECT * FROM Joueur ORDER BY nom, prenom');
         return $req->fetchAll(PDO::FETCH_ASSOC);
     }
 }

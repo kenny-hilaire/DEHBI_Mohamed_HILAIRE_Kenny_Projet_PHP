@@ -10,7 +10,7 @@ class Joueur {
     private $statut;
     private $poste_preferer;
 
-    public function __construct(String $Id_Joueur, String $nom, String $prenom, String $numero_licence, String $date_naissance, String $taille, float $poids, String $statut, String $poste_preferer ){
+    public function __construct(String $Id_Joueur, String $nom, String $prenom, String $numero_licence, String $date_naissance, float $taille, float $poids, String $statut, String $poste_preferer ){
         $this->Id_Joueur = $Id_Joueur;
         $this->nom = $nom;
         $this->prenom=$prenom;
