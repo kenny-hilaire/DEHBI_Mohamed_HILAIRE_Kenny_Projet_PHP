@@ -46,7 +46,7 @@ public function updateInfo(Joueur $joueur, String $nouveauStatut, String $nouvea
             'poste_preferer' => $nouveauPostePref, 
             'poids' => $nouveauPoids
         ]);
-}
+    }
 
     public function delete(Joueur $joueur){
         $sup = $this->pdo->prepare("delete from Joueur where Id_Joueur = :Id_Joueur");
