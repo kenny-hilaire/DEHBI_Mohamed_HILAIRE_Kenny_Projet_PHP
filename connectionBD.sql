@@ -2,12 +2,12 @@ CREATE TABLE Joueur(
    Id_Joueur VARCHAR(50),
    nom VARCHAR(50),
    prenom VARCHAR(50),
-   numéro_licence VARCHAR(50),
+   numero_licence VARCHAR(50),
    date_naissance DATE,
    taille DECIMAL(3,2),
    poids DECIMAL(3,2),
    statut VARCHAR(50),
-   poste_préferer VARCHAR(50),
+   poste_preferer VARCHAR(50),
    PRIMARY KEY(Id_Joueur)
 );
 
@@ -35,7 +35,7 @@ CREATE TABLE Participe(
    FOREIGN KEY(Id_Match) REFERENCES Match_(Id_Match)
 );
 
-CREATE TBALE Commentaire(
+CREATE TABLE Commentaire(
    Id_Commentaire VARCHAR(50),
    notes_perso VARCHAR(50),
    date_comm   DATE
