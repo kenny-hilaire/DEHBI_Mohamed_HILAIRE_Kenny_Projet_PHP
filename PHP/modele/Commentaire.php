@@ -5,7 +5,7 @@
     private $date_comm; 
     private $Id_Joueur;
 
-    public function __construct(String $Id_commentaire , String $notes_perso , DATE date_comm, String $Id_Joueur){
+    public function __construct(String $Id_commentaire , String $notes_perso, DATE $date_comm, String $Id_Joueur){
         $this->Id_Commentaire = $Id_commentaire;
         $this->notes_perso = $notes_perso;
         $this->$date_comm = $date_comm;

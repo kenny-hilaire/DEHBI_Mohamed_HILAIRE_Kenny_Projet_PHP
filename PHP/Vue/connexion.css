@@ -1,84 +1,91 @@
-/* Réinitialisation basique */
-* {
+/* Styles généraux du corps de la page */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9; /* Arrière-plan très clair */
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
-}
-
-/* Body : fond clair + centrage du contenu */
-body {
-    background: linear-gradient(135deg, #1e1e2f, #2a2a48);
-    height: 100vh;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
+    min-height: 100vh; /* S'assurer que le corps prend toute la hauteur de la vue */
+}
+
+/* Styles pour l'en-tête */
+header {
+    width: 100%;
+    background-color: #007bff; /* Couleur primaire pour l'en-tête */
     color: white;
-}
-
-/* Zone de connexion */
-.container {
-    background: rgba(255, 255, 255, 0.08);
-    padding: 40px;
-    border-radius: 12px;
-    width: 380px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(6px);
-}
-
-/* Titre */
-.container h1 {
+    padding: 15px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     text-align: center;
-    margin-bottom: 30px;
-    font-size: 1.8rem;
-    color: #ffffff;
 }
 
-/* Labels */
-.container label {
-    display: block;
-    margin-bottom: 6px;
-    font-size: 1rem;
+nav {
+    font-size: 1.2em;
+    font-weight: bold;
 }
 
-/* Inputs */
-.container input[type="text"],
-.container input[type="password"] {
+/* Styles pour le conteneur principal du formulaire */
+.container {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px; /* Limiter la largeur du formulaire */
+    margin: 50px 0;
+    text-align: center;
+}
+
+/* Styles pour le titre du formulaire */
+h1 {
+    color: #333;
+    margin-bottom: 25px;
+    font-size: 1.8em;
+}
+
+/* Styles pour les labels */
+label {
+    display: block; /* Chaque label sur une nouvelle ligne */
+    text-align: left;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+/* Styles pour les champs de saisie (input type="text") */
+input[type="text"] {
     width: 100%;
     padding: 10px;
-    margin-bottom: 20px;
-    border: none;
-    border-radius: 6px;
-    background: rgba(255, 255, 255, 0.2);
-    color: white;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Inclure le padding et la bordure dans la largeur totale */
 }
 
-.container input::placeholder {
-    color: #ddd;
-}
-
-/* Bouton */
-.container button {
-    width: 100%;
-    padding: 12px;
-    font-size: 1.1rem;
-    border: none;
-    border-radius: 6px;
-    background: #4a62ff;
+/* Styles pour le bouton de soumission */
+input[type="submit"] {
+    background-color: #28a745; /* Couleur verte pour le bouton Connexion */
     color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
     cursor: pointer;
-    transition: 0.3s;
+    font-size: 1em;
+    font-weight: bold;
+    width: 100%;
+    transition: background-color 0.3s ease;
 }
 
-.container button:hover {
-    background: #3549e0;
+/* Effet au survol du bouton */
+input[type="submit"]:hover {
+    background-color: #218838; /* Vert un peu plus foncé au survol */
 }
 
-/* Barre du haut */
-nav {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    font-size: 1.2rem;
-    color: #ccc;
+/* Styles optionnels pour le message d'erreur (si vous l'affichez en HTML) */
+.error {
+    color: red;
+    margin-top: 15px;
+    font-weight: bold;
 }

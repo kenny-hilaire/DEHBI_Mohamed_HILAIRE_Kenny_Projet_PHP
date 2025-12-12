@@ -23,7 +23,7 @@
             <li>Optimisez votre stratégie match après match</li><br>
             <li>Votre equipe, vos choix, vos victoire</li><br>
         </ul>
-        <form action="Connexion.html">
+        <form action="Connexion.php">
             <button type="submit">Connexion</button>
         </form>
 

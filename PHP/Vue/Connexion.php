@@ -17,7 +17,7 @@
             <input type="text" name="Identifiant" ><br>
             <label>Mot de passe</label>
             <input type="text" name="Mot_de_passe" ><br><br>
-            <form action="menuPrincipale" method="get">
+            <form action="menuPrincipale.php" method="get">
             <input type="submit" name="Connexion" ><br>
 </form>
 

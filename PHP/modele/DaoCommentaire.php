@@ -2,12 +2,6 @@
 class commentaire{
       private $pdo;
 
-
-    private $Id_Commentaire ; 
-    private $notes_perso; 
-    private $date_comm; 
-    private $Id_Joueur;
-
     public function __construct(){
      try {
             $this->pdo = new PDO("mysql:host=localhost;dbname=basketball;charset=utf8", 'ETU', 'PHPKenny2025*');
@@ -16,7 +10,7 @@ class commentaire{
      }
 }
 
-public function insert(Joueur $c){
+public function insert(Commentaire $c){
      $req = $this->pdo->prepare('
             INSERT INTO Commenatire (Id_Commentaire, notes_perso, date_comm, Id_Joueur)
             VALUES (:Id_Commentaire and :notes_perso and
