@@ -12,13 +12,6 @@ class ParticipeDAO{
      }
 }
 
- String $idJoueur,
-        String $idMatch,
-        String $poste,
-        String $evaluationPerf ,
-        String $titulaireOuRemplacant,
-        String $idParticipation 
-
 public function insert(Joueur $c){
      $req = $this->pdo->prepare('
             INSERT INTO Participe (Id_Joueur, Id_Match, id_participation, poste,  evaluation_perf, titulaire_ou_remplacant  )

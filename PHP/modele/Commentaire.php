@@ -12,7 +12,7 @@
         $this->Id_Joueur = $Id_Joueur;
     }
 
-    function getIdCommentaire {
+    function getIdCommentaire() {
         return $this->Id_Commentaire;
     }
     function getNotes_perso(){

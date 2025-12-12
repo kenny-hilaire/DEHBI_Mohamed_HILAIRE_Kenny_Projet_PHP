@@ -56,7 +56,7 @@ public function updateInfo(Joueur $joueur, String $nouveauStatut, String $nouvea
 
 
     public function select(Joueur $j){
-         $req = $this->pdo->prepare("select * from Joueur where Id_Joueur ;");
+         $req = $this->pdo->prepare("select * from Joueur where Id_Joueur = :Id_Joueur ;");
 		$req ->execute(['Id_Joueur' => $j->getId_Joueur]);
     return $req->fetchAll(PDO::FETCH_ASSOC);
     }
