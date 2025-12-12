@@ -6,7 +6,12 @@
 }
 
 /* Fond général */
+
+    
 body {
+    background-color: red ;
+
+
     min-height: 100vh;
     background-size: cover;
     background-position: center;
