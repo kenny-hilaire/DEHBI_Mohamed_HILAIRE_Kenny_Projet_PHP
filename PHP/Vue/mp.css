@@ -1,4 +1,87 @@
-.mp{
-    height: 50px;
-    width: 50px;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Fond général */
+body {
+    min-height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #111;
+
+    color: #fff;
+    padding: 40px;
+}
+
+/* Titre principal */
+h1 {
+    text-align: center;
+    color: #ff7a00;
+    margin-bottom: 50px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Section menu */
+.menu {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+/* Cartes (même style pour les 3) */
+.menu > div {
+    width: 300px;
+    background-color: rgba(0, 0, 0, 0.85);
+    border: 3px solid #ff7a00;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Effet hover */
+.menu > div:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 0 20px rgba(255, 122, 0, 0.6);
+}
+
+/* Images */
+.mp {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    border: 2px solid #ff7a00;
+}
+
+/* Titres des cartes */
+.menu h3 {
+    color: #fff;
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+
+/* Boutons */
+.menu input[type="submit"] {
+    padding: 10px 25px;
+    background-color: #ff7a00;
+    color: #000;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease;
+}
+
+.menu input[type="submit"]:hover {
+    background-color: #ff9a33;
 }

@@ -17,7 +17,7 @@
         $this->lieu_rencontre= $lieu_rencontre;
         }
 
-        fuction getId_Match (){
+        function getId_Match (){
             return $this->Id_Match;
         }
         function getDateMatch(){
