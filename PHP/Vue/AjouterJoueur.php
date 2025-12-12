@@ -25,7 +25,6 @@
         <label for="PostePrf">poste préféré</label>
         <input type="text" id="PostePrf" name="PostePrf"><br><br>
         <form action="menuPrincipale.php" method="GET">
-        <input type="" value="">
 </form>
         <input type="submit" value="Vider">
         <form action="menuPrincipale.php" method="GET">
