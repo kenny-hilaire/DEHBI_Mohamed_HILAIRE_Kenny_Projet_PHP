@@ -15,6 +15,12 @@
                 case "Voir les détails du joueur":
                     header("Location: DetailsJoueur.php");
                     exit();
+                case "Modifier un joueur":
+                    header("Location: modifier_Joueur.php");
+                    exit();
+                case  "retour à l'accueil":
+                    header("Location: accueil.php");
+                    exit();
             }
 ?>
     
