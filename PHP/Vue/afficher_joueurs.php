@@ -58,7 +58,7 @@ $Joueur = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <td><?= htmlspecialchars($j['poste_preferer']) ?></td>
 
             <td>
-                <a href="ModifierJoueur.php?id=<?= $j['Id_Joueur'] ?>">✏️ Modifier</a>
+                <a href="modifier_Joueur.php?id=<?= $j['Id_Joueur'] ?>">✏️ Modifier</a>
                 <a href="SupprimerJoueur.php?id=<?= $j['Id_Joueur'] ?>">🗑 Supprimer</a>
             </td>
         </tr>
@@ -69,8 +69,7 @@ $Joueur = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <br>
 
     <input type="submit" name="action" value="Ajouter un joueur">
-    <input type="submit" name="action" value="Modifier un joueur">
-    <input type="submit" name="action" value="Supprimer un joueur">
+    <input type="submit" name="action" value="retour au menu">
 
 </form>
 
@@ -83,13 +82,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         case "Ajouter un joueur":
             header("Location: AjouterJoueur.php");
             exit();
-
-        case "Modifier un joueur":
-            header("Location: Modifier_Joueur.php");
-            exit();
-
-        case "Supprimer un joueur":
-            header("Location: SupprimerJoueur.php");
+        case "retour au menu":
+            header("Location: menuPrincipale.php");
             exit();
     }
 }

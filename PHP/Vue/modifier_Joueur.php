@@ -1,3 +1,24 @@
+<?php
+$pdo = new PDO("mysql:host=localhost;dbname=php_projet;charset=utf8", "root", "");
+
+// récupérer l'id
+$id = $_GET['id'] ?? null;
+if (!$id) {
+    die("Joueur introuvable");
+}
+
+// récupérer le joueur
+$sql = "SELECT * FROM joueur WHERE Id_Joueur = ?";
+$stmt = $pdo->prepare($sql);
+$stmt->execute([$id]);
+$joueur = $stmt->fetch(PDO::FETCH_ASSOC);
+
+if (!$joueur) {
+    die("Joueur non trouvé");
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,27 +27,78 @@
     <title>Document</title>
 </head>
 <body>
-    <form action=""  methode="post">
-        <label for="joueur">Modifier le jour :</label><br><br>
-        <label for="Nom">NOM : </label>
-        <input type="text" id="Nom" name="Nom" required><br><br>
-        <label for="Prenom">Prenom : </label>
-        <input type="text" id="Prenom" name="Prenom" required><br><br>
-        <label for="NumLicence">Numéro de licence</label>
-        <input type="text" id="NumLicence" name="NumLicence" required><br><br>
-        <label for="DateNaissance">Date de naissance : </label>
-        <input type="Date" id="DateNaiss" name="DateNaiss" required><br><br>
-        <label for="Taille">Taille : </label>
-        <input type="text" id="Taille" name="Taille" required><br><br>
-        <label for="Poids">Poids : </label>
-        <input type="text" id="Poids" name="Poids" required><br><br>
-        <label for="Status">Status</label>
-        <input type="text" id="Status" name="Status" required><br><br>
-        <label for="PostePrf">poste préféré</label>
-        <input type="text" id="PostePrf" name="PostePrf" required><br><br>
-        <input type="submit" value="Ajouter">
-        <input type="submit" value="Vider">
-        <input type="submit" value="Accueil">
+    <form action=""  method="post">
+        <input type="hidden" name="id" value="<?= $joueur['Id_Joueur'] ?>">
+
+        <label>Nom</label>
+        <input type="text" value="<?= $joueur['nom'] ?>" readonly><br><br>
+
+        <label>Prénom</label>
+        <input type="text" value="<?= $joueur['prenom'] ?>" readonly><br><br>
+
+        <label>Numéro licence</label>
+        <input type="text" value="<?= $joueur['numero_licence'] ?>" readonly><br><br>
+
+        <label>Date naissance</label>
+        <input type="date" value="<?= $joueur['date_naissance'] ?>" readonly><br><br>
+
+        <hr>
+
+        <label>Taille</label>
+        <input type="number" step="0.01" name="taille" value="<?= $joueur['taille'] ?>"><br><br>
+
+        <label>Poids</label>
+        <input type="number" step="0.01" name="poids" value="<?= $joueur['poids'] ?>"><br><br>
+
+        <label>Statut</label>
+        <input type="text" name="statut" value="<?= $joueur['statut'] ?>"><br><br>
+
+        <label>Poste préféré</label>
+        <input type="text" name="poste_preferer" value="<?= $joueur['poste_preferer'] ?>"><br><br>
+
+        <input type="submit" name="action" value="Valider">
+        <input type="submit" name="action" value="Annuler">
     </form>
+
+    
 </body>
 </html>
+
+
+<?php
+
+$pdo = new PDO("mysql:host=localhost;dbname=php_projet;charset=utf8","root","",[PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['action'])) {
+
+    if ($_POST['action'] === "Valider") {
+
+        $id = $_POST['id'];
+        $nouveauStatut = $_POST['statut'];
+        $nouveauPostePref = $_POST['poste_preferer'];
+        $nouvelleTaille = (float) $_POST['taille'];
+        $nouveauPoids = (float) $_POST['poids'];
+
+        $sql = "UPDATE joueur 
+                SET statut = ?, poste_preferer = ?, taille = ?, poids = ?
+                WHERE Id_Joueur = ?";
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([
+            $nouveauStatut,
+            $nouveauPostePref,
+            $nouvelleTaille,
+            $nouveauPoids,
+            $id
+        ]);
+
+        header("Location: afficher_joueurs.php");
+        exit();
+    }
+    elseif ($_POST['action'] === "Annuler") {
+        header("Location: afficher_joueurs.php");
+        exit();
+    }
+}
+?>
+
