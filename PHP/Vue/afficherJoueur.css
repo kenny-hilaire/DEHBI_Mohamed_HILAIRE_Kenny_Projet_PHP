@@ -1,0 +1,12 @@
+*{
+    margin : 0px;
+    padding: px;
+    font-family: Avenir, sans-serif;
+}
+
+nav ul{
+    list-style-type: none;
+}
+nav li{
+    float: left;
+}
