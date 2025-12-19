@@ -11,10 +11,11 @@
 <body>
     <nav>
         <ul>
-            <li><a href="#">Liste de match</a></li>
-            <li><a href ="#">Joueur</a></li>
-            <li><a href ="#">Statistique</a></li>
-            <input type="submit" name="Deconnexion" value="Deconnexion">    
+            <li><a href="menuPrincipale.php">Accueil</a></li>
+            <li><a href="afficher_matches.php">🏀Liste de match</a></li>
+            <li><a href ="afficher_joueurs.php">👤Joueur</a></li>
+            <li><a href ="statistique.php">📊Statistique</a></li>
+            <li><input type="submit" name="Deconnexion" value="Deconnexion">  </li>  
         </ul>
     </nav>
 
