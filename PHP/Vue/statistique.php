@@ -7,6 +7,15 @@
     <link rel="stylesheet" href="statistique.css">
 </head>
 <body>
+      <nav>
+        <ul>
+            <li><a href="menuPrincipale.php">Accueil</a></li>
+            <li><a href="afficher_matches.php">🏀Liste de match</a></li>
+            <li><a href ="afficher_joueurs.php">👤Joueur</a></li>
+            <li><a href ="statistique.php">📊Statistique</a></li>
+            <li><input type="submit" name="Deconnexion" value="Deconnexion">  </li>  
+        </ul>
+    </nav>
     <h1>Statistique</h1>
     <div class="res">
         <h3>Résultats globaux :</h3>

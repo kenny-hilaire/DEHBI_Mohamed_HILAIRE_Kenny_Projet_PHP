@@ -1,23 +1,25 @@
-<?php
 
-$pdo = new PDO("mysql:host=localhost;dbname=php_projet;charset=utf8", "root", "");
-
-$sql = "SELECT Id_Joueur, nom, prenom, numero_licence, date_naissance, taille, poids, statut, poste_preferer FROM joueur";
-$stmt = $pdo->prepare($sql);
-$stmt->execute();
-$Joueur = $stmt->fetchAll(PDO::FETCH_ASSOC);
-?>
 
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <title>Liste des joueurs</title>
+       <link rel="stylesheet" href="afficherJoueur.css">
 </head>
 
 <body>
+    <nav>
+        <ul>
+            <li><a href="menuPrincipale.php">Accueil</a></li>
+            <li><a href="afficher_matches.php">🏀Liste de match</a></li>
+            <li><a href ="afficher_joueurs.php">👤Joueur</a></li>
+            <li><a href ="statistique.php">📊Statistique</a></li>
+            <li><input type="submit" name="Deconnexion" value="Deconnexion">  </li>  
+        </ul>
+    </nav>
 
-<form method="POST">
+    <form method="POST">
 
     <table border="1" style="border-collapse: collapse;" width="900px">
         <tr>

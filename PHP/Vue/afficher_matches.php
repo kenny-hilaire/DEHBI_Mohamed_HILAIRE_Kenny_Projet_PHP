@@ -4,8 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+           <link rel="stylesheet" href="afficher_Match.css">
+
 </head>
 <body>
+
+    <nav>
+        <ul>
+            <li><a href="menuPrincipale.php">Accueil</a></li>
+            <li><a href="afficher_matches.php">🏀Liste de match</a></li>
+            <li><a href ="afficher_joueurs.php">👤Joueur</a></li>
+            <li><a href ="statistique.php">📊Statistique</a></li>
+            <li><input type="submit" name="Deconnexion" value="Deconnexion">  </li>  
+        </ul>
+    </nav>
+
     <form method="POST" action="">
         <table border="1px solid white" border-collapse= "collapse" width="850px">
                <tr><th><label for="Date">Date</label></th>
