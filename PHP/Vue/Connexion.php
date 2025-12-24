@@ -1,3 +1,32 @@
+<?php
+session_start();
+
+// Identifiants autorisés
+$user = "HLKDH";
+$passwd = "PhpProject2025";
+
+$error = "";
+
+if (isset($_POST['Connexion'])) {
+    if (!empty($_POST['Identifiant']) && !empty($_POST['Mot_de_passe'])) {
+
+        if ($_POST['Identifiant'] === $user && $_POST['Mot_de_passe'] === $passwd) {
+            $_SESSION['auth'] = true;
+            $_SESSION['login'] = $_POST['Identifiant'];
+
+            // Redirection vers le menu principal
+            header("Location:menuPrincipale.php");
+            exit;
+        } else {
+            $error = "Identifiant ou mot de passe incorrect";
+        }
+
+    } else {
+        $error = "Veuillez remplir tous les champs";
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -11,33 +40,19 @@
         <nav>
             Page de connexion
         </nav>
-    <div class="container">
-            <h1>Connectez vous</h1>
-            <label>Idientifiant</label>
-            <input type="text" name="Identifiant" ><br>
-            <label>Mot de passe</label>
-            <input type="text" name="Mot_de_passe" ><br><br>
-            <form action="menuPrincipale.php" method="get">
-            <input type="submit" name="Connexion" ><br>
-</form>
+        <div class="container">
+                <h1>Connectez vous</h1>
+                <form method="post">
+            <label>Identifiant</label><br>
+            <input type="text" name="Identifiant"><br><br>
+            <label>Mot de passe</label><br>
+            <input type="password" name="Mot_de_passe"><br><br>
+            <input type="submit" name="Connexion" value="ENVOYER">
+        </form>
 
-    </div>
+        </div>
     </header>
+</body>
+</html>
 
-    <?php
-     session_start();
 
-    //mot de passe et identifiants autorisé
-    $user = "hilaire";
-    $passwd = "PhpProject2025*";
-
-     if (!empty ($_POST['Idientifiant']) && !empty($_POST['Mot_de_passe']) && isset($_POST['Connexion'])){
-        if ($_POST['Idientifiant'] == $user && $_POST['Mot_de_passe'] == $passwd){
-            $_SESSION['auth'] = true;
-            $_SESSION['log'] = $_POST['Idientifiant'];
-        } else{
-            $error = 'oups, vos identifiants sont invalidies, réesayez';
-        } 
-    }
-
-    ?>
