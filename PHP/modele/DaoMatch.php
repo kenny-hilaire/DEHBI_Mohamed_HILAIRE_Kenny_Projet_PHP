@@ -1,23 +1,14 @@
 <?php
 require_once 'Match.php'; 
-class MatchDAO{
+require_once 'ConnectionBD.php'; // ✅ On inclut la classe de connexion
+
+class MatchDAO {
     private $pdo;
 
-     //private $Id_Match;
-        //private $date_Match;
-      //  private $Heure_Match;
-    //    private $Nom_adversaire; 
-  //      private $resultat;
-//        private $lieu_rencontre; 
-
-
-    public function __construct(){
-     try {
-            $this->pdo = new PDO("mysql:host=localhost;dbname=basketball;charset=utf8", 'hilaire', 'PHPKenny2025*');
-    } catch (Exception $e) {
-         die("Erreur de connexion : " . $e->getMessage());
-     }
-}
+    public function __construct() {
+        $connection = new ConnectionBD();
+        $this->pdo = $connection->getConnection();
+    }
 
 public function insert(Match $m){
      $req = $this->pdo->prepare('

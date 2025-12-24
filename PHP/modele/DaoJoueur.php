@@ -1,17 +1,16 @@
 <?php
 require_once 'Joueur.php'; // ✅ Important pour que Contact soit reconnu
+require_once 'ConnectionBD.php'; // ✅ On inclut la classe de connexion
 
-class JoueurDAO{
+class JoueurDAO {
     private $pdo;
 
-    public function __construct(){
-     try {
-            $this->pdo = new PDO("mysql:host=localhost;dbname=basketball;charset=utf8", 'ETU', 'PHPKenny2025*');
-    } catch (Exception $e) {
-         die("Erreur de connexion : " . $e->getMessage());
-     }
-}
-
+    public function __construct() {
+        // ✅ On instancie ConnectionBD et on récupère le PDO
+        $connection = new ConnectionBD();
+        $this->pdo = $connection->getConnection();
+    }
+    
 public function insert(Joueur $c){
      $req = $this->pdo->prepare('
             INSERT INTO joueur (Id_Joueur, nom , prenom, numero_licence, date_naissance, taille, poids,statut,poste_preferer)

@@ -1,14 +1,14 @@
 <?php
-class commentaire{
-      private $pdo;
+require_once 'ConnectionBD.php'; // ✅ On inclut la classe de connexion
 
-    public function __construct(){
-     try {
-            $this->pdo = new PDO("mysql:host=localhost;dbname=basketball;charset=utf8", 'ETU', 'PHPKenny2025*');
-    } catch (Exception $e) {
-         die("Erreur de connexion : " . $e->getMessage());
-     }
-}
+class CommentaireDAO {
+    private $pdo;
+
+    public function __construct() {
+        // ✅ On instancie ConnectionBD et on récupère le PDO
+        $connection = new ConnectionBD();
+        $this->pdo = $connection->getConnection();
+    }
 
 public function insert(Commentaire $c){
      $req = $this->pdo->prepare('
