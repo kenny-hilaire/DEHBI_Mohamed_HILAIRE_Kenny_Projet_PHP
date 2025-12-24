@@ -22,6 +22,11 @@
         <input type="submit" value="Ajouter">
         <input type="submit" value="Vider">
         <input type="submit" value="Accueil">
+        
     </form>
 </body>
 </html>
+
+<?php
+--"faudra mettre la possibilité d'évaluer chaque joueur dans cette page "
+?>

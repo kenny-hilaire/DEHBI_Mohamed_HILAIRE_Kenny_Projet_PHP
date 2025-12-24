@@ -4,41 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestion d'une équipe de sport</title>
-    <link rel="stylesheet" href="statistique.css">
+    <link rel="stylesheet" href="Statistique.css">
 </head>
-<body>
-      <nav>
-        <ul>
-            <li><a href="menuPrincipale.php">Accueil</a></li>
-            <li><a href="afficher_matches.php">🏀Liste de match</a></li>
-            <li><a href ="afficher_joueurs.php">👤Joueur</a></li>
-            <li><a href ="statistique.php">📊Statistique</a></li>
-            <li><input type="submit" name="Deconnexion" value="Deconnexion">  </li>  
-        </ul>
-    </nav>
-    <h1>Statistique</h1>
-    <div class="res">
-        <h3>Résultats globaux :</h3>
-        <p>Nombres tatal de matchs gagnés : <span id ="totalMatch"></span></p>
-        <p>Victoires : <span id="victoire"></span></p>
-        <p>Défaites :<span id="loses"></span></p>
-        <p>Matchs nuls :<span id ="Draw"></span></p>
 
-</div>
+    <section id="Global_Stats">
+        <h1>Bilan de la Saison</h1>
+        <div class ="percent">
+            <h1>Match Gagnés:</h1>
+        </div>
+        <div class="percent">
+            <h1>Match perdus</h1>
+        </div>
+        <div class="percent">
+            <h1>Matchs Nuls</h1>
+        </div>
+    </section>
 
-<section class="StatJoueur">
-    <h2>Statistiques des joueurs</h2>
-    <table>
-        <thead>
+    <section id="board">
+        <h1>Tableau des performance</h1>
+
+        <table>
             <tr>
                 <th>Joueur</th>
                 <th>Statut</th>
-                <th>Poste préféré</th>
-                <th>Titularisations</th>
-                <th>Remplacements</th>
-                <th>Moy. évaluation</th>
-                <th>Titularisations consécutives</th>
+                <th>Poste Préferer</th>
+                <th>Titularisation</th>
+                <th>Remplacemnt</th>
+                <th>Moyenne.Eval</th>
+                <th>% Victoires</th>
+                <th>Sélections Conséc.</th>
             </tr>
-        </thead>
-    </table>
-<section>
+        </table>
+        
+    </section>
