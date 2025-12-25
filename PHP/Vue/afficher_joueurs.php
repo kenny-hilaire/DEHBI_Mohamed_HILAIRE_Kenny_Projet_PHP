@@ -15,7 +15,7 @@ $Joueur = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <head>
     <meta charset="UTF-8">
     <title>Liste des joueurs</title>
-       <link rel="stylesheet" href="afficherJoueur.css">
+       <link rel="stylesheet" href="Listejoueurs.css">
 </head>
 
 <body>
