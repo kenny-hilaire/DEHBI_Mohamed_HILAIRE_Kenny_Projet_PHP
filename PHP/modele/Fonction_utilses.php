@@ -36,7 +36,7 @@ class Fonction_utiles {
         $total = $this->pdo->query("SELECT COUNT(*) FROM Match_")->fetchColumn();
         if ($total == 0) return 0;
 
-        $sql = "SELECT count(*) FROM Match WHERE resultat = 'victoire'";
+        $sql = "SELECT count(*) FROM Match_ WHERE resultat = 'victoire'";
         $victoires = $this->pdo->query($sql)->fetchColumn();
 
         return round(($victoires / $total) * 100, 2);
@@ -76,7 +76,7 @@ class Fonction_utiles {
 
         // Nombre de victoires
         $sqlWin = "SELECT COUNT(*) FROM Participe P
-                   JOIN Match_ M ON P.Id_Match_ = M.Id_Match_
+                   JOIN Match_ M ON P.Id_Match = M.Id_Match
                    WHERE P.Id_Joueur = :id AND M.resultat = 'victoire'";
         $stmtWin = $this->pdo->prepare($sqlWin);
         $stmtWin->execute(['id' => $p_idJoueur]);
