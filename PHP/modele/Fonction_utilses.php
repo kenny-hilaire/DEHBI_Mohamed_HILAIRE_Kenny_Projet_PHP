@@ -1,6 +1,6 @@
 <?php
 
-require_once 'ConnectionBD.php'; 
+require_once __DIR__ . '/connexionBD.php';
 
 class Fonction_utiles {
     private $pdo;
@@ -11,7 +11,7 @@ class Fonction_utiles {
     }
 
     // ------------------- Nb titularisation d'un joueur -------------------
-    public function nombreMatchTitulaire($p_idJoueur) {
+    public function nombreMatch_Titulaire($p_idJoueur) {
         $sql = "SELECT count(*) FROM Participe 
                 WHERE Id_Joueur = :id 
                 AND titulaire_ou_remplacant = 'titulaire'"; // Orthographe selon schéma
@@ -32,8 +32,8 @@ class Fonction_utiles {
     }
 
     // ------------------- % de match gagné -------------------
-    public function nombre_victoire() {
-        $total = $this->pdo->query("SELECT COUNT(*) FROM Match")->fetchColumn();
+    public function nombre_victoire(): int {
+        $total = $this->pdo->query("SELECT COUNT(*) FROM Match_")->fetchColumn();
         if ($total == 0) return 0;
 
         $sql = "SELECT count(*) FROM Match WHERE resultat = 'victoire'";
@@ -44,21 +44,21 @@ class Fonction_utiles {
 
     // ------------------- % de match null -------------------
     public function nombre_draw() {
-        $total = $this->pdo->query("SELECT COUNT(*) FROM Match")->fetchColumn();
+        $total = $this->pdo->query("SELECT COUNT(*) FROM Match_")->fetchColumn();
         if ($total == 0) return 0;
 
-        $sql = "SELECT count(*) FROM Match WHERE resultat = 'egalte'";
+        $sql = "SELECT count(*) FROM Match_ WHERE resultat = 'egalte'";
         $draws = $this->pdo->query($sql)->fetchColumn();
 
         return round(($draws / $total) * 100, 2);
     }
 
-    // ------------------- % de match perdu -------------------
+    // ------------------- % de Match_ perdu -------------------
     public function nombre_perdu() {
-        $total = $this->pdo->query("SELECT COUNT(*) FROM Match")->fetchColumn();
+        $total = $this->pdo->query("SELECT COUNT(*) FROM Match_")->fetchColumn();
         if ($total == 0) return 0;
 
-        $sql = "SELECT count(*) FROM Match WHERE resultat = 'perdu'"; // Corrigé 'egalte' du SQL original
+        $sql = "SELECT count(*) FROM Match_ WHERE resultat = 'perdu'"; // Corrigé 'egalte' du SQL original
         $perdus = $this->pdo->query($sql)->fetchColumn();
 
         return round(($perdus / $total) * 100, 2);
@@ -66,7 +66,7 @@ class Fonction_utiles {
 
     // ------------------- % victoire ou Joueur a participer -------------------
     public function pourcentage_victoire_joueur($p_idJoueur) {
-        // Nombre total de matchs joués par ce joueur
+        // Nombre total de Match_s joués par ce joueur
         $sqlPart = "SELECT COUNT(*) FROM Participe WHERE Id_Joueur = :id";
         $stmtPart = $this->pdo->prepare($sqlPart);
         $stmtPart->execute(['id' => $p_idJoueur]);
@@ -76,7 +76,7 @@ class Fonction_utiles {
 
         // Nombre de victoires
         $sqlWin = "SELECT COUNT(*) FROM Participe P
-                   JOIN Match M ON P.Id_Match = M.Id_Match
+                   JOIN Match_ M ON P.Id_Match_ = M.Id_Match_
                    WHERE P.Id_Joueur = :id AND M.resultat = 'victoire'";
         $stmtWin = $this->pdo->prepare($sqlWin);
         $stmtWin->execute(['id' => $p_idJoueur]);

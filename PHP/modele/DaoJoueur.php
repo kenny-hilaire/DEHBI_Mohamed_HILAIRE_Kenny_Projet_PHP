@@ -1,6 +1,6 @@
 <?php
-require_once 'Joueur.php'; // ✅ Important pour que Contact soit reconnu
-require_once 'ConnectionBD.php'; // ✅ On inclut la classe de connexion
+require_once 'Joueur.php'; 
+require_once '../modele/connexionBD.php';
 
 class JoueurDAO {
     private $pdo;
