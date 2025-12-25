@@ -1,5 +1,5 @@
 <?php
-require_once 'ConnectionBD.php'; // ✅ On inclut la classe de connexion
+require_once 'ConnectionBD.php'; 
 
 class CommentaireDAO {
     private $pdo;

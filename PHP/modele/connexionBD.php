@@ -12,7 +12,7 @@ private $pdo;
      }
 }
 
-public PDO getConnection(){
+public function getConnection() : PDO{
     return $this->pdo;
 }
 }

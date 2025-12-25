@@ -1,6 +1,8 @@
 <?php
-
-$pdo = new PDO("mysql:host=localhost;dbname=basketball;charset=utf8", "root", "");
+require_once '../modele/connexionBD.php'; 
+    
+$connectionBD = new ConnectionBD();
+$pdo = $connectionBD->getConnection();
 
 $sql = "SELECT Id_Joueur, nom, prenom, numero_licence, date_naissance, taille, poids, statut, poste_preferer FROM joueur";
 $stmt = $pdo->prepare($sql);
