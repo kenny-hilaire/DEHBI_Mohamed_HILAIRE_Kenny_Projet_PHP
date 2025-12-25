@@ -43,7 +43,7 @@ else {
         <div class="statistique">
             <img src="PHOTO/stat.jpg" alt="stat joueurs" class="mp">
             <h3>Statistique de l'equipe</h3>
-             <form action="stat.php" method="GET">
+             <form action="statistique.php" method="GET">
                 <input type="submit" value="Acceder">
             </form>
         </div>

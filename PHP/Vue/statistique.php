@@ -4,11 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestion d'une équipe de sport</title>
-    <link rel="stylesheet" href="Statistique.css">
+    <link rel="stylesheet" href="statistique.css">
 </head>
+<body>
+     <nav>
+        <ul>
+            <li><a href="menuPrincipale.php">Accueil</a></li>
+            <li><a href="afficher_matches.php">🏀Liste de match</a></li>
+            <li><a href ="afficher_joueurs.php">👤Joueur</a></li>
+            <li><a href ="statistique.php">📊Statistique</a></li>
+            <li>
+                <input type="submit" name="Deconnexion" value="Deconnexion">  
+            </li>  
+        </ul>
+    </nav>
 
-    <section id="Global_Stats">
-        <h1>Bilan de la Saison</h1>
+    <section id="title">
+        <h1>Bilan de la Saison</h1><br>
         <?php
         require_once '../modele/DaoJoueur.php'; 
         require_once '../modele/connexionBD.php';
@@ -20,19 +32,20 @@
         $joueurDAO = new JoueurDAO(); 
         $listeJoueurs = $joueurDAO->obtenirTous();
     ?>
-
-    <div class="percent">
-        <h3>Matchs Gagnés : <?= $fonction->nombre_victoire(); ?>%</h3>
-    </div>
-    
-    <div class="percent">
-        <h3>Matchs Perdus : <?= $fonction->nombre_perdu(); ?>%</h3>
-    </div>
-    
-    <div class="percent">
-        <h3>Matchs Nuls : <?= $fonction->nombre_draw(); ?>%</h3>
-    </div>
-</section>
+        <section id="Global_Stats">
+            <div class="percent">
+                <h3>Matchs Gagnés : <?= $fonction->nombre_victoire(); ?>%</h3>
+            </div>
+            
+            <div class="percent">
+                <h3>Matchs Perdus : <?= $fonction->nombre_perdu(); ?>%</h3>
+            </div>
+            
+            <div class="percent">
+                <h3>Matchs Nuls : <?= $fonction->nombre_draw(); ?>%</h3>
+            </div>
+        </section>
+    </section>
 
     <section id="board">
         <h1>Tableau des performance</h1>
@@ -67,3 +80,4 @@
         </table>
         
     </section>
+        </body>
