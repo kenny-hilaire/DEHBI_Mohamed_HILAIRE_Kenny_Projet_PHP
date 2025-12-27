@@ -46,6 +46,8 @@ nav input[type="submit"] {
 body {
     font-family: Arial, sans-serif;
     padding: 30px;
+     margin: 0;
+    padding: 0;
 }
 
 h1 {

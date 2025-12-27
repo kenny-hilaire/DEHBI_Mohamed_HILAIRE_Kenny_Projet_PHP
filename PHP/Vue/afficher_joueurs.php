@@ -1,14 +1,27 @@
 <?php
 require_once '../modele/connexionBD.php'; 
-    
+require_once '../modele/DaoJoueur.php';
+
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    switch ($_POST['action']) {
+
+        case "Ajouter un joueur":
+            header("Location: AjouterJoueur.php");
+            exit();
+        case "retour au menu":
+            header("Location: menuPrincipale.php");
+            exit();
+    }
+}
 $connectionBD = new ConnectionBD();
 $pdo = $connectionBD->getConnection();
+$daoJoueur = new JoueurDAO();
+$Joueur = $daoJoueur->obtenirTous();
 
-$sql = "SELECT Id_Joueur, nom, prenom, numero_licence, date_naissance, taille, poids, statut, poste_preferer FROM joueur";
-$stmt = $pdo->prepare($sql);
-$stmt->execute();
-$Joueur = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
+
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -75,21 +88,7 @@ $Joueur = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 </form>
 
-<?php
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-    switch ($_POST['action']) {
-
-        case "Ajouter un joueur":
-            header("Location: AjouterJoueur.php");
-            exit();
-        case "retour au menu":
-            header("Location: menuPrincipale.php");
-            exit();
-    }
-}
-?>
 
 </body>
 </html>

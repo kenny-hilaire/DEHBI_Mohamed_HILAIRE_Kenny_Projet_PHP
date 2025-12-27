@@ -47,7 +47,7 @@ if (isset($_POST['Connexion'])) {
             <input type="text" name="Identifiant"><br><br>
             <label>Mot de passe</label><br>
             <input type="password" name="Mot_de_passe"><br><br>
-            <input type="submit" name="Connexion" value="ENVOYER">
+            <input type="submit" name="Connexion" value="Connecter">
         </form>
 
         </div>

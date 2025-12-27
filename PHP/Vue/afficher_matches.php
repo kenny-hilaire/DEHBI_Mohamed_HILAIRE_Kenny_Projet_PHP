@@ -12,7 +12,11 @@
             <li><a href="afficher_matches.php">🏀Liste de match</a></li>
             <li><a href ="afficher_joueurs.php">👤Joueur</a></li>
             <li><a href ="statistique.php">📊Statistique</a></li>
-            <li><input type="submit" name="Deconnexion" value="Deconnexion">  </li>  
+            <li>
+                <form action="deconnexion.php" method="post">
+                    <input type="submit" name="Deconnexion" value="Deconnexion"> 
+                </form>    
+            </li>  
         </ul>
     </nav>
 
@@ -51,7 +55,6 @@ foreach ($listeMatchs as $match): ?>
         <input type="submit" name="action" value="Préparer la feuille de match">
         <input type="submit" name="action" value="Modifier le match">
         <input type="submit" name="action" value="Supprimer le match">
-        <input type="submit" name="action" value="Ajouter un match">
 
         <?php
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -74,9 +77,6 @@ foreach ($listeMatchs as $match): ?>
                         $matchDAO->delete($match);
                         exit();
 
-                    case "Ajouter un match":
-                        header("Location: AjouterMatche.php");
-                        exit();
                 }
             }
         ?>
@@ -84,6 +84,7 @@ foreach ($listeMatchs as $match): ?>
     </form>
 
 </section>
+<input type="submit" name="action" value="Ajouter un match">
 
 <?php endforeach; ?>
 
