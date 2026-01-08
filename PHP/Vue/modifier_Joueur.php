@@ -25,40 +25,54 @@ if (!$joueur) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="modifier_Joueur.css">
 </head>
 <body>
-    <form action=""  method="post">
-        <input type="hidden" name="id" value="<?= $joueur['Id_Joueur'] ?>">
+   <nav>
+    <ul>
+        <li><a href="afficher_joueurs.php">Joueurs</a></li>
+        <li><a href="menu.php">Menu</a></li>
+    </ul>
+</nav>
 
-        <label>Nom</label>
-        <input type="text" value="<?= $joueur['nom'] ?>" readonly><br><br>
+<h1>Modifier le joueur</h1>
 
-        <label>Prénom</label>
-        <input type="text" value="<?= $joueur['prenom'] ?>" readonly><br><br>
+    <div class="form-container">
+        <form action="" method="post">
 
-        <label>Numéro licence</label>
-        <input type="text" value="<?= $joueur['numero_licence'] ?>" readonly><br><br>
+            <input type="hidden" name="id" value="<?= $joueur['Id_Joueur'] ?>">
 
-        <label>Date naissance</label>
-        <input type="date" value="<?= $joueur['date_naissance'] ?>" readonly><br><br>
+            <label>Nom</label>
+            <input type="text" value="<?= $joueur['nom'] ?>" readonly>
 
-        <hr>
+            <label>Prénom</label>
+            <input type="text" value="<?= $joueur['prenom'] ?>" readonly>
 
-        <label>Taille</label>
-        <input type="number" step="0.01" name="taille" value="<?= $joueur['taille'] ?>"><br><br>
+            <label>Numéro licence</label>
+            <input type="text" value="<?= $joueur['numero_licence'] ?>" readonly>
 
-        <label>Poids</label>
-        <input type="number" step="0.01" name="poids" value="<?= $joueur['poids'] ?>"><br><br>
+            <label>Date naissance</label>
+            <input type="date" value="<?= $joueur['date_naissance'] ?>" readonly>
 
-        <label>Statut</label>
-        <input type="text" name="statut" value="<?= $joueur['statut'] ?>"><br><br>
+            <hr>
 
-        <label>Poste préféré</label>
-        <input type="text" name="poste_preferer" value="<?= $joueur['poste_preferer'] ?>"><br><br>
+            <label>Taille</label>
+            <input type="number" step="0.01" name="taille" value="<?= $joueur['taille'] ?>">
 
-        <input type="submit" name="action" value="Valider">
-        <input type="submit" name="action" value="Annuler">
-    </form>
+            <label>Poids</label>
+            <input type="number" step="0.01" name="poids" value="<?= $joueur['poids'] ?>">
+
+            <label>Statut</label>
+            <input type="text" name="statut" value="<?= $joueur['statut'] ?>">
+
+            <label>Poste préféré</label>
+            <input type="text" name="poste_preferer" value="<?= $joueur['poste_preferer'] ?>">
+
+            <input type="submit" name="action" value="Valider">
+            <input type="submit" name="action" value="Annuler">
+
+        </form>
+    </div>
 
     
 </body>

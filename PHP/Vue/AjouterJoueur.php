@@ -4,46 +4,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="ajouterJoueur.css">
 </head>
 <body>
-    <form action=""  method="post">
-        <label for="joueur">Ajouter un jour de match :</label><br><br>
+ <link rel="stylesheet" href="css/ajouter_joueur.css">
 
-        <label for="Id_Joueur">ID Joueur : </label>
-        <input type="text" id="Id_Joueur" name="Id_Joueur" required><br><br>
+<nav>
+    <ul>
+        <li><a href="menu.php">Menu</a></li>
+        <li><a href="afficher_joueur.php">Joueurs</a></li>
+    </ul>
+</nav>
 
-        <label for="Nom">NOM : </label>
-        <input type="text" id="Nom" name="Nom" required><br><br>
+<h1>Ajouter un joueur</h1>
 
-        <label for="Prenom">Prenom : </label>
-        <input type="text" id="Prenom" name="Prenom" required><br><br>
+<div class="form-container">
+    <form method="post">
 
-        <label for="NumLicence">Numéro de licence</label>
-        <input type="text" id="NumLicence" name="NumLicence" required><br><br>
+        <label>ID Joueur</label>
+        <input type="text" name="id_joueur">
 
-        <label for="DateNaissance">Date de naissance : </label>
-        <input type="Date" id="DateNaiss" name="DateNaiss" required><br><br>
+        <label>Nom</label>
+        <input type="text" name="nom">
 
-        <label for="Taille">Taille : </label>
-        <input type="text" id="Taille" name="Taille" required><br><br>
+        <label>Prénom</label>
+        <input type="text" name="prenom">
 
-        <label for="Poids">Poids : </label>
-        <input type="text" id="Poids" name="Poids" required><br><br>
-        
-        <label for="Status">Status</label>
-        <input type="text" id="Status" name="Status" required><br><br>
+        <label>Numéro de licence</label>
+        <input type="text" name="licence">
 
-        <label for="PostePrf">poste préféré</label>
-        <input type="text" id="PostePrf" name="PostePrf" required><br><br>
+        <label>Date de naissance</label>
+        <input type="date" name="date_naissance">
 
-        <input type="submit" value="Ajouter">
-        <input type="reset" value="Vider">
-        <a href="afficher_joueurs.php">
-            <button type="button">Retour à la liste</button>
-        </a>
-            <a href="menuPrincipale.php">
-            <button type="button">Retour à l'acceuil</button>
-        </a>
+        <label>Taille</label>
+        <input type="number" name="taille">
+
+        <label>Poids</label>
+        <input type="number" name="poids">
+
+        <label>Status</label>
+        <input type="text" name="status">
+
+        <label>Poste préféré</label>
+        <input type="text" name="poste">
+
+        <input type="submit" value="Ajouter le joueur">
+    </form>
+</div>
+
+<div class="links">
+    <a href="afficher_joueurs.php">Retour à la liste</a>
+    <a href="menuPrincipale.php">Retour à l'accueil</a>
+</div>
+
 
 </body>
 </html>

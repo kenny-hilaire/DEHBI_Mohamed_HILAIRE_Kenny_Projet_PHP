@@ -1,6 +1,23 @@
 <?php
+$pdo = new PDO(
+    "mysql:host=localhost;dbname=basketball;charset=utf8",
+    'ETU',
+    'PHPKenny2025*',
+    [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
+);
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['action'])) {
 
-$pdo = new PDO("mysql:host=localhost;dbname=basketball;charset=utf8", "root", "");
+    switch ($_POST['action']) {
+
+        case "Ajouter un joueur":
+            header("Location: AjouterJoueur.php");
+            exit();
+
+        case "retour au menu":
+            header("Location: menuPrincipale.php");
+            exit();
+    }
+}
 
 $sql = "SELECT Id_Joueur, nom, prenom, numero_licence, date_naissance, taille, poids, statut, poste_preferer FROM joueur";
 $stmt = $pdo->prepare($sql);
@@ -8,12 +25,13 @@ $stmt->execute();
 $Joueur = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <title>Liste des joueurs</title>
-       <link rel="stylesheet" href="afficherJoueur.css">
+    <link rel="stylesheet" href="afficher_joueurs.css">
 </head>
 
 <body>
@@ -29,7 +47,7 @@ $Joueur = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </ul>
     </nav>
 
-    <form method="POST">
+    <form action ="" method="POST">
 
     <table border="1" style="border-collapse: collapse;" width="900px">
         <tr>
@@ -73,21 +91,7 @@ $Joueur = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 </form>
 
-<?php
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-    switch ($_POST['action']) {
-
-        case "Ajouter un joueur":
-            header("Location: AjouterJoueur.php");
-            exit();
-        case "retour au menu":
-            header("Location: menuPrincipale.php");
-            exit();
-    }
-}
-?>
 
 </body>
 </html>

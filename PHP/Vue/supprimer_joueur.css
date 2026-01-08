@@ -1,0 +1,91 @@
+/* RESET DE BASE */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* BODY */
+body {
+    background-color: #f4f6f9;
+    color: #333;
+    padding: 20px;
+}
+
+/* TITRE */
+h1 {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+/* CARTE CONFIRMATION */
+.confirm-card {
+    max-width: 650px;
+    margin: auto;
+    background-color: #ffffff;
+    padding: 24px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    border-left: 6px solid #ef4444; /* touche rouge */
+}
+
+/* TEXTE WARNING */
+.warning-text {
+    font-size: 16px;
+    font-weight: 600;
+    color: #991b1b;
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    padding: 12px 14px;
+    border-radius: 8px;
+    margin-bottom: 18px;
+}
+
+/* ACTIONS */
+.confirm-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+/* BOUTON SUPPRIMER */
+.btn-danger {
+    background-color: #ef4444;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.btn-danger:hover {
+    background-color: #dc2626;
+}
+
+/* LIEN ANNULER (bouton gris) */
+.btn-cancel {
+    display: inline-block;
+    background-color: #64748b;
+    color: white;
+    text-decoration: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.btn-cancel:hover {
+    background-color: #475569;
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+    .confirm-card {
+        padding: 18px;
+    }
+}

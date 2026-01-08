@@ -26,15 +26,21 @@ if (isset($_POST['confirmer'])) {
 <head>
     <meta charset="UTF-8">
     <title>Supprimer joueur</title>
+    <link rel="stylesheet" href="supprimer_joueur.css">
 </head>
 <body>
 
-<p>⚠️ Voulez-vous vraiment supprimer ce joueur ?</p>
 
-<form method="post">
-    <input type="submit" name="confirmer" value="Oui, supprimer">
-    <a href="afficher_joueurs.php">Annuler</a>
-</form>
+<h1>Supprimer un joueur</h1>
+
+<div class="confirm-card">
+    <p class="warning-text"> Voulez-vous vraiment supprimer ce joueur ?</p>
+
+    <form method="post" class="confirm-actions">
+        <input type="submit" name="confirmer" value="Oui, supprimer" class="btn-danger">
+        <a href="afficher_joueurs.php" class="btn-cancel">Annuler</a>
+    </form>
+</div>
 
 </body>
 </html>
