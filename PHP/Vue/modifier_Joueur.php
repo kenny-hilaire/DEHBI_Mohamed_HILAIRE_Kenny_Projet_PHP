@@ -1,5 +1,8 @@
 <?php
-$pdo = new PDO("mysql:host=localhost;dbname=php_projet;charset=utf8", "root", "");
+require_once '../modele/connexionBD.php'; 
+
+$connectionBD = new ConnectionBD();
+$pdo = $connectionBD->getConnection();
 
 // récupérer l'id
 $id = $_GET['id'] ?? null;
@@ -81,7 +84,8 @@ if (!$joueur) {
 
 <?php
 
-$pdo = new PDO("mysql:host=localhost;dbname=php_projet;charset=utf8","root","",[PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+$connectionBD = new ConnectionBD();
+$pdo = $connectionBD->getConnection();
 
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['action'])) {
 

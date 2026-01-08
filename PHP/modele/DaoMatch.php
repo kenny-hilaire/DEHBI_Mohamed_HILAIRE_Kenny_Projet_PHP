@@ -1,27 +1,18 @@
 <?php
 require_once 'Match.php'; 
-class MatchDAO{
+require_once '../modele/connexionBD.php';
+
+class MatchDAO {
     private $pdo;
 
-     //private $Id_Match;
-        //private $date_Match;
-      //  private $Heure_Match;
-    //    private $Nom_adversaire; 
-  //      private $resultat;
-//        private $lieu_rencontre; 
+    public function __construct() {
+        $connection = new ConnectionBD();
+        $this->pdo = $connection->getConnection();
+    }
 
-
-    public function __construct(){
-     try {
-            $this->pdo = new PDO("mysql:host=localhost;dbname=basketball;charset=utf8", 'hilaire', 'PHPKenny2025*');
-    } catch (Exception $e) {
-         die("Erreur de connexion : " . $e->getMessage());
-     }
-}
-
-public function insert(Match $m){
+public function insert(Match_ $m){
      $req = $this->pdo->prepare('
-            INSERT INTO Match (Id_Match, date_Match, Heure_Match, Nom_adversaire,  resultat, lieu_rencontre)
+            INSERT INTO Match_ (Id_Match, date_Match, Heure_Match, Nom_adversaire,  resultat, lieu_rencontre)
             VALUES (:Id_Match and :date_Match and :Heure_Match and
              :Nom_adversaire and :resultat
              and :lieu_rencontre)
@@ -40,9 +31,9 @@ public function insert(Match $m){
 
  
 
-public function updateInfo(Match $p,  DATE $date_Match, String $Heure_Match){
+public function updateInfo(Match_ $p,  DATE $date_Match, String $Heure_Match){
         $req = $this->pdo->prepare("
-            UPDATE Match
+            UPDATE Match_
             SET date_Match = :date_Match, Heure_Match = :Heure_Match
             WHERE Id_Match = :$p->getId_Match()
 
@@ -54,15 +45,15 @@ public function updateInfo(Match $p,  DATE $date_Match, String $Heure_Match){
         ]);
 }
 
-    public function delete(Match $m){
+    public function delete(Match_ $m){
         $sup = $this->pdo->prepare("delete from Participe where Id_Joueur = :Id_Joueur and Id_Match = : Id_Match");
     $sup -> execute([
 	'Id_Match' =>$m->getId_Match()]);
     }
 
 
-    public function select(Match $m){
-         $req = $this->pdo->prepare("select * from Match where Id_Match = :Id_Match;");
+    public function select(Match_ $m){
+         $req = $this->pdo->prepare("select * from Match_ where Id_Match = :Id_Match;");
 		$req ->execute(['Id_Match' =>$m->getIdMatch() ]);
     return $req->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -70,7 +61,7 @@ public function updateInfo(Match $p,  DATE $date_Match, String $Heure_Match){
 
 
     public function obtenirTous() {
-        $req = $this->pdo->query('SELECT * FROM Match ORDER BY Id_Match');
+        $req = $this->pdo->query('SELECT * FROM Match_ ORDER BY Id_Match');
         return $req->fetchAll(PDO::FETCH_ASSOC);
     }
 }

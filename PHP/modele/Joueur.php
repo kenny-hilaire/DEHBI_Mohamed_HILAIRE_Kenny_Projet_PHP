@@ -47,6 +47,7 @@ class Joueur {
         return $this->statut;
     }
     public function getPoste_Preferer(){
-        return $this->poste_preferer
+        return $this->poste_preferer;
     }
 }
+?>

@@ -1,39 +1,60 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-           <link rel="stylesheet" href="afficher_Match.css">
-
+    <title>Calendrier des Matchs</title>
+    <link rel="stylesheet" href="match.css">
 </head>
 <body>
-
-    <nav>
+     <nav>
         <ul>
             <li><a href="menuPrincipale.php">Accueil</a></li>
             <li><a href="afficher_matches.php">🏀Liste de match</a></li>
             <li><a href ="afficher_joueurs.php">👤Joueur</a></li>
             <li><a href ="statistique.php">📊Statistique</a></li>
-            <li><input type="submit" name="Deconnexion" value="Deconnexion">  </li>  
+            <li>
+                <form action="deconnexion.php" method="post">
+                    <input type="submit" name="Deconnexion" value="Deconnexion"> 
+                </form>    
+            </li>  
         </ul>
     </nav>
 
-    <form method="POST" action="">
-        <table border="1px solid white" border-collapse= "collapse" width="850px">
-               <tr><th><label for="Date">Date</label></th>
-               <th><label for="Heure">Heure</label></th>
-               <th><label for="Adversaire">Adversaire</label></th>
-               <th><label for="Lieu">Lieu</label></th>
-               <th><label for="Résultat">Résultat</label></th>
-               </tr>
-        </table>
+<h1>Calendrier des matchs</h1>
 
-        <input type="submit" name="action" value="Voir feuille du match">
+<?php 
+require_once '../modele/connexionBD.php';
+require_once '../modele/DaoMatch.php'; 
+
+$connectionBD = new ConnectionBD();
+$pdo = $connectionBD->getConnection();
+$matchDAO = new MatchDAO(); 
+$listeMatchs = $matchDAO->obtenirTous();
+foreach ($listeMatchs as $match): ?>
+
+<section class="match-card">
+
+    <div class="match-date">
+        <strong><?= date('D d M', strtotime($match['DATE_'])) ?></strong><br>
+        <?= substr($match['HEURE'], 0, 5) ?>
+    </div>
+
+    <div class="match-opponent">
+        VS <strong><?= $match['Nom_adversaire'] ?></strong>
+    </div>
+
+    <div class="match-location">
+        📍 <?= $match['lieu_rencontre'] ?>
+    </div>
+
+    <div class="match-result">
+        Résultat : <?= $match['resultat'] ?? 'À venir' ?>
+    </div>
+
+    <input type="submit" name="action" value="Voir feuille du match">
         <input type="submit" name="action" value="Préparer la feuille de match">
         <input type="submit" name="action" value="Modifier le match">
         <input type="submit" name="action" value="Supprimer le match">
-        <input type="submit" name="action" value="Ajouter un match">
 
         <?php
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -49,20 +70,25 @@
                         exit();
 
                     case "Modifier le match":
-                        header("Location: Modifier_Matche.php");
+                        header("Location: modifier_match.php");
                         exit();
 
                     case "Supprimer le match":
-                        header("Location: SupprimerMatch.php");
+                        $matchDAO->delete($match);
                         exit();
 
-                    case "Ajouter un match":
-                        header("Location: AjouterMatche.php");
-                        exit();
                 }
             }
         ?>
 
     </form>
+
+</section>
+<input type="submit" name="action" value="Ajouter un match">
+
+<?php endforeach; ?>
+
 </body>
 </html>
+
+

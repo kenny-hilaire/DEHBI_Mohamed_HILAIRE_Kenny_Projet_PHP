@@ -1,3 +1,20 @@
+<?php
+session_start();
+    
+if (!isset($_SESSION['auth']) || $_SESSION['auth'] !== true ){
+    header("Location: Connexion.php"); // ou index.php selon ton nom de page
+    exit;
+}
+
+// si c'est la 1er fois que je viens mon compteur vaut 0
+if (!isset($_SESSION['cpt1'])) {
+    $_SESSION['cpt1'] = 0;
+}
+else {
+    $_SESSION['cpt1']++;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -26,7 +43,7 @@
         <div class="statistique">
             <img src="PHOTO/stat.jpg" alt="stat joueurs" class="mp">
             <h3>Statistique de l'equipe</h3>
-             <form action="stat.php" method="GET">
+             <form action="statistique.php" method="GET">
                 <input type="submit" value="Acceder">
             </form>
         </div>

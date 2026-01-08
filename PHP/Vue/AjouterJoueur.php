@@ -62,12 +62,10 @@
 </html>
 
 <?php
-$pdo = new PDO(
-    "mysql:host=localhost;dbname=php_projet;charset=utf8",
-    "root",
-    "",
-    [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
-);
+require_once '../modele/connexionBD.php'; 
+
+$connectionBD = new ConnectionBD();
+$pdo = $connectionBD->getConnection();
 
 $erreur = "";
 

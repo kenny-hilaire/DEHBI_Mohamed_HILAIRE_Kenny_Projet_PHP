@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
 $pdo = new PDO(
     "mysql:host=localhost;dbname=basketball;charset=utf8",
     'ETU',
@@ -18,11 +19,29 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['action'])) {
             exit();
     }
 }
+=======
+require_once '../modele/connexionBD.php'; 
+require_once '../modele/DaoJoueur.php';
 
-$sql = "SELECT Id_Joueur, nom, prenom, numero_licence, date_naissance, taille, poids, statut, poste_preferer FROM joueur";
-$stmt = $pdo->prepare($sql);
-$stmt->execute();
-$Joueur = $stmt->fetchAll(PDO::FETCH_ASSOC);
+>>>>>>> b6cef70dd842227337d2a2a6e4005883fd38f159
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    switch ($_POST['action']) {
+
+        case "Ajouter un joueur":
+            header("Location: AjouterJoueur.php");
+            exit();
+        case "retour au menu":
+            header("Location: menuPrincipale.php");
+            exit();
+    }
+}
+$connectionBD = new ConnectionBD();
+$pdo = $connectionBD->getConnection();
+$daoJoueur = new JoueurDAO();
+$Joueur = $daoJoueur->obtenirTous();
+
 ?>
 
 
@@ -31,7 +50,11 @@ $Joueur = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <head>
     <meta charset="UTF-8">
     <title>Liste des joueurs</title>
+<<<<<<< HEAD
     <link rel="stylesheet" href="afficher_joueurs.css">
+=======
+       <link rel="stylesheet" href="Listejoueurs.css">
+>>>>>>> b6cef70dd842227337d2a2a6e4005883fd38f159
 </head>
 
 <body>

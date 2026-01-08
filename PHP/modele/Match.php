@@ -1,5 +1,5 @@
 <?php
-    class Match{
+    class Match_{
         private $Id_Match;
         private $date_Match;
         private $Heure_Match;
