@@ -26,7 +26,7 @@ if (isset($_POST['confirmer'])) {
 <head>
     <meta charset="UTF-8">
     <title>Supprimer joueur</title>
-    <link rel="stylesheet" href="supprimer_joueur.css">
+    <link rel="stylesheet" href="CSS/supprimer_joueur.css">
 </head>
 <body>
 

@@ -1,11 +1,5 @@
 <?php
-<<<<<<< HEAD
-$pdo = new PDO(
-    "mysql:host=localhost;dbname=basketball;charset=utf8",
-    'ETU',
-    'PHPKenny2025*',
-    [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
-);
+
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['action'])) {
 
     switch ($_POST['action']) {
@@ -19,11 +13,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['action'])) {
             exit();
     }
 }
-=======
 require_once '../modele/connexionBD.php'; 
 require_once '../modele/DaoJoueur.php';
 
->>>>>>> b6cef70dd842227337d2a2a6e4005883fd38f159
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -50,11 +42,8 @@ $Joueur = $daoJoueur->obtenirTous();
 <head>
     <meta charset="UTF-8">
     <title>Liste des joueurs</title>
-<<<<<<< HEAD
-    <link rel="stylesheet" href="afficher_joueurs.css">
-=======
-       <link rel="stylesheet" href="Listejoueurs.css">
->>>>>>> b6cef70dd842227337d2a2a6e4005883fd38f159
+    <link rel="stylesheet" href="CSS/afficher_joueurs.css">
+
 </head>
 
 <body>
