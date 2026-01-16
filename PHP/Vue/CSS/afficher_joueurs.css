@@ -1,4 +1,3 @@
-/* RESET DE BASE */
 * {
     margin: 0;
     padding: 0;
@@ -6,67 +5,66 @@
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* BODY */
+
 body {
+    margin: 0;
     background-color: #f4f6f9;
     color: #333;
+}
+
+main {
     padding: 20px;
 }
 
-/* NAVBAR */
+h1 {
+    text-align: center;
+    margin: 30px 0;
+    font-weight: 700;
+}
+
 nav {
-    background-color: #1e293b;
-    padding: 12px 20px;
-    margin-bottom: 25px;
-    border-radius: 8px;
+    background-color: #121212;
+    padding: 12px 0;
+    margin: 0;
+    border-radius: 0;
 }
 
 nav ul {
     list-style: none;
     display: flex;
     align-items: center;
-    gap: 20px;
-}
-
-nav ul li {
-    display: flex;
-    align-items: center;
+    justify-content: center;
+    gap: 28px;
+    padding: 0;
+    margin: 0;
 }
 
 nav a {
-    color: #f8fafc;
     text-decoration: none;
-    font-weight: 500;
-    padding: 6px 10px;
-    border-radius: 5px;
-    transition: background-color 0.2s ease;
+    color: #ffffff;
+    font-weight: 600;
+    transition: color 0.2s ease;
 }
 
 nav a:hover {
-    background-color: #334155;
+    color: #FDB927;
 }
 
-/* BOUTON DECONNEXION (même style que lien) */
 nav input[type="submit"] {
-    background-color: #ef4444;
-    border: none;
+    background: #552583;
     color: white;
-    padding: 6px 12px;
-    border-radius: 5px;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 999px;
     cursor: pointer;
-    font-weight: 500;
+    font-weight: 600;
 }
 
-nav input[type="submit"]:hover {
-    background-color: #dc2626;
-}
 
-/* FORM */
 form {
     margin-top: 20px;
 }
 
-/* TABLE */
 table {
     width: 100%;
     max-width: 1100px;
@@ -101,7 +99,6 @@ tr:hover {
     background-color: #eef2ff;
 }
 
-/* ACTIONS */
 td a {
     text-decoration: none;
     font-weight: 500;
@@ -124,7 +121,6 @@ td a:last-child:hover {
     text-decoration: underline;
 }
 
-/* BOUTONS BAS DE PAGE */
 form > input[type="submit"] {
     margin-top: 20px;
     padding: 10px 18px;
@@ -154,7 +150,6 @@ form > input[value="retour au menu"]:hover {
     background-color: #475569;
 }
 
-/* RESPONSIVE */
 @media (max-width: 900px) {
     table, thead, tbody, th, td, tr {
         font-size: 12px;
@@ -163,5 +158,7 @@ form > input[value="retour au menu"]:hover {
     nav ul {
         flex-wrap: wrap;
         gap: 10px;
+        justify-content: center;
     }
 }
+

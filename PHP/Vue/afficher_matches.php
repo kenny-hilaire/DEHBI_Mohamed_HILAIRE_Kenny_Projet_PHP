@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Calendrier des Matchs</title>
-    <link rel="stylesheet" href="match.css">
+    <link rel="stylesheet" href="CSS/match.css">
 </head>
 <body>
      <nav>

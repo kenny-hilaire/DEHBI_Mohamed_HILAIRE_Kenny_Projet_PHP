@@ -21,7 +21,7 @@ else {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestion d'une équipe de sport</title>
-    <link rel="stylesheet" href="menuPrincipale.css">
+    <link rel="stylesheet" href="CSS/menuPrincipale.css">
 </head>
 <body>
     <h1> Content de vous revoir coach, à vous de jouer maintenant!!</h1>

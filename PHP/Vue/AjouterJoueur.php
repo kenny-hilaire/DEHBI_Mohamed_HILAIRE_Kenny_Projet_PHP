@@ -4,15 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="ajouterJoueur.css">
+    <link rel="stylesheet" href="CSS/ajouterJoueur.css">
 </head>
 <body>
- <link rel="stylesheet" href="css/ajouter_joueur.css">
 
 <nav>
     <ul>
-        <li><a href="menu.php">Menu</a></li>
-        <li><a href="afficher_joueur.php">Joueurs</a></li>
+        <li><a href="menuPrincipale.php">Menu</a></li>
+        <li><a href="afficher_joueurs.php">Joueurs</a></li>
     </ul>
 </nav>
 
