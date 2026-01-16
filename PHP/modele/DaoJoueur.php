@@ -6,52 +6,58 @@ class JoueurDAO {
     private $pdo;
 
     public function __construct() {
-        // ✅ On instancie ConnectionBD et on récupère le PDO
         $connection = new ConnectionBD();
         $this->pdo = $connection->getConnection();
     }
     
-public function insert(Joueur $c){
-     $req = $this->pdo->prepare('
-            INSERT INTO joueur (Id_Joueur, nom , prenom, numero_licence, date_naissance, taille, poids,statut,poste_preferer)
-            VALUES (:Id_Joueur and :nom and :prenom and
-             :numero_licence and :date_naissance
-             and :taille and :poids and :statut and :poste_preferer)
-        ');
-        // à modifier
-        $req->execute([
-            'nom' => $c->getNom(),
-            'prenom' => $c->getPrenom(),
-            'Id_Joueur' => $c->getId_Joueur(),
-            'numero_licence' => $c->getNumLicence(),
-            'date_naissance' => $c->getDateNaissance(),
-            'taille' => $c->getTaille(),
-            'poids' => $c->getPoids(),
-            'statut' => $c->getStatut(),
-            'poste_preferer'=> $c->getPoste_Preferer()
-        ]);
-}
+    public function insert(Joueur $j) {
 
-public function updateInfo(Joueur $joueur, String $nouveauStatut, String $nouveauPostePref, float $nouvelleTaille, float $nouveauPoids ){
-        $req = $this->pdo->prepare("
-            UPDATE contact
-            SET statut = :nouveauStatut, poste_preferer = :nouveauPostePref, taille = :nouvelleTaille, poids = :nouveauPoids
-            WHERE numero_licence = :numLicence 
-        ");
+        $sql = "
+            INSERT INTO joueur
+            (Id_Joueur, nom, prenom, numero_licence, date_naissance, taille, poids, statut, poste_preferer)
+            VALUES
+            (:id, :nom, :prenom, :licence, :date_naissance, :taille, :poids, :statut, :poste)
+        ";
+
+        $req = $this->pdo->prepare($sql);
+
         $req->execute([
-            'Id_Joueur' => $joueur->getId_Joueur,
-            'nouveauStatut' =>$nouveauStatut,
-            'taille' => $nouvelleTaille,
-            'poste_preferer' => $nouveauPostePref, 
-            'poids' => $nouveauPoids
+            'id' => $j->getId_Joueur(),
+            'nom' => $j->getNom(),
+            'prenom' => $j->getPrenom(),
+            'licence' => $j->getNumLicence(),
+            'date_naissance' => $j->getDateNaissance(),
+            'taille' => $j->getTaille(),
+            'poids' => $j->getPoids(),
+            'statut' => $j->getStatut(),
+            'poste' => $j->getPoste_Preferer()
         ]);
     }
 
-    public function delete(Joueur $joueur){
-        $sup = $this->pdo->prepare("delete from Joueur where Id_Joueur = :Id_Joueur");
-    $sup -> execute([
-	':Id_Joueur' => $joueur->getId_Joueur]);
+    public function updateInfo(Joueur $joueur, String $nouveauStatut, String $nouveauPostePref, float $nouvelleTaille, float $nouveauPoids ){
+            $req = $this->pdo->prepare("
+                UPDATE contact
+                SET statut = :nouveauStatut, poste_preferer = :nouveauPostePref, taille = :nouvelleTaille, poids = :nouveauPoids
+                WHERE numero_licence = :numLicence 
+            ");
+            $req->execute([
+                'Id_Joueur' => $joueur->getId_Joueur,
+                'nouveauStatut' =>$nouveauStatut,
+                'taille' => $nouvelleTaille,
+                'poste_preferer' => $nouveauPostePref, 
+                'poids' => $nouveauPoids
+            ]);
+        }
+
+    public function delete(String $idJoueur) {
+        $req = $this->pdo->prepare(
+            "DELETE FROM joueur WHERE Id_Joueur = :id"
+        );
+        $req->execute([
+            'id' => $idJoueur
+        ]);
     }
+
 
 
     public function select(Joueur $j){

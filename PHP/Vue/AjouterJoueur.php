@@ -12,7 +12,7 @@
     <ul>
         <li><a href="menuPrincipale.php">Menu</a></li>
         <li><a href="afficher_joueurs.php">Joueurs</a></li>
-    </ul>
+    </ul>   
 </nav>
 
 <h1>Ajouter un joueur</h1>
@@ -21,7 +21,7 @@
     <form method="post">
 
         <label>ID Joueur</label>
-        <input type="text" name="id_joueur">
+        <input type="text" name="Id_joueur">
 
         <label>Nom</label>
         <input type="text" name="nom">
@@ -42,7 +42,7 @@
         <input type="number" name="poids">
 
         <label>Status</label>
-        <input type="text" name="status">
+        <input type="text" name="statut">
 
         <label>Poste préféré</label>
         <input type="text" name="poste">
@@ -61,7 +61,10 @@
 </html>
 
 <?php
-require_once '../modele/connexionBD.php'; 
+require_once '../Modele/connexionBD.php';
+require_once '../Modele/DaoJoueur.php';
+
+
 
 $connectionBD = new ConnectionBD();
 $pdo = $connectionBD->getConnection();
@@ -69,43 +72,38 @@ $pdo = $connectionBD->getConnection();
 $erreur = "";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-
-    if (
-        !empty($_POST["Id_Joueur"]) &&
-        !empty($_POST["Nom"]) &&
-        !empty($_POST["Prenom"]) &&
-        !empty($_POST["NumLicence"]) &&
-        !empty($_POST["DateNaiss"]) &&
-        !empty($_POST["Taille"]) &&
-        !empty($_POST["Poids"]) &&
-        !empty($_POST["Status"]) &&
-        !empty($_POST["PostePrf"])
+     if (
+        !empty($_POST["Id_joueur"]) &&
+        !empty($_POST["nom"]) &&
+        !empty($_POST["prenom"]) &&
+        !empty($_POST["licence"]) &&
+        !empty($_POST["date_naissance"]) &&
+        !empty($_POST["taille"]) &&
+        !empty($_POST["poids"]) &&
+        !empty($_POST["statut"]) &&
+        !empty($_POST["poste"])
     ) {
 
         // Vérifier si l'ID existe déjà
         $check = $pdo->prepare("SELECT 1 FROM joueur WHERE Id_Joueur = ?");
-        $check->execute([$_POST["Id_Joueur"]]);
-
+        $check->execute([$_POST["Id_joueur"]]);
         if ($check->fetch()) {
             $erreur = "⚠️ Cet ID joueur existe déjà.";
         } else {
+            $joueur = new Joueur(
+            $_POST["Id_joueur"],
+            $_POST["nom"],
+            $_POST["prenom"],
+            $_POST["licence"],
+            $_POST["date_naissance"],
+            $_POST["taille"],
+            $_POST["poids"],
+            $_POST["statut"],
+            $_POST["poste"]
+        );
 
-            $sql = "INSERT INTO joueur
-            (Id_Joueur, nom, prenom, numero_licence, date_naissance, taille, poids, statut, poste_preferer)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
-            $stmt = $pdo->prepare($sql);
-            $stmt->execute([
-                $_POST["Id_Joueur"],
-                $_POST["Nom"],
-                $_POST["Prenom"],
-                $_POST["NumLicence"],
-                $_POST["DateNaiss"],
-                $_POST["Taille"],
-                $_POST["Poids"],
-                $_POST["Status"],
-                $_POST["PostePrf"]
-            ]);
+        $dao = new JoueurDAO();
+        $dao->insert($joueur);
 
             header("Location: afficher_joueurs.php");
             exit;

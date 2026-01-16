@@ -15,7 +15,7 @@ class Joueur {
         $this->nom = $nom;
         $this->prenom=$prenom;
         $this->numero_licence = $numero_licence;
-        $this->date_naissance= $date_naisssance;
+        $this->date_naissance= $date_naissance;
         $this->taille = $taille;
         $this->poids=$poids;
         $this->statut=$statut;
