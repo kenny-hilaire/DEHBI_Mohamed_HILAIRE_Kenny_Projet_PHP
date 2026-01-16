@@ -65,9 +65,11 @@ public function updateInfo(Joueur $joueur, String $nouveauStatut, String $nouvea
         return $req->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function obtenirActifs(){
-        $req = $this->pdo->query('SELECT nom  FROM Joueur where statut = actif order by 1');
-        return $req->fetchAll(PDO::FETCH_ASSOC);
-
-    }
+    public function obtenirActifs() {
+    // On définit la requête dans $req
+    $req = "SELECT * FROM Joueur WHERE statut = 'actif' ORDER BY nom ASC";
+    // On utilise $this->pdo->query($req) car la variable est $req
+    $resultat = $this->pdo->query($req);
+    return $resultat->fetchAll(PDO::FETCH_ASSOC);
+}
 }

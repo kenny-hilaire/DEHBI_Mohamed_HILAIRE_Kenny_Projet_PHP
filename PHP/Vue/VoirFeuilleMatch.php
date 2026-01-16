@@ -7,38 +7,74 @@
        <link rel="stylesheet" href="afficher_joueurs.css">
 </head>
 <body>
-    <h1>Feuille de Match<h2>
-
-    <table border="1" style="border-collapse: collapse;" width="900px">
-        <tr>
-            <th>Titulaire</th>
-            <th>Poste</th>
-            <th>Taille</th>
-            <th>Poids licence</th>
-            <th>Evaluations</th>
-            <th>Commentaire</th>
-        </tr>
-        
-
         <?php
+        require_once '../modele/connexionBD.php';
+        require_once '../modele/DaoMatch.php'; 
+        require_once '../modele/DaoJoueur.php';
             $connectionBD = new ConnectionBD();
             $pdo = $connectionBD->getConnection();
             $daoJoueur = new JoueurDAO();
             $Joueur = $daoJoueur->obtenirActifs();
-            $i = 1;?>
+        ?>
+            <form action="index.php?action=enregistrerFeuille" method="POST">
+    <h2>Titulaires</h2>
+    <table class="feuille-table">
+        <thead>
+            <tr class="ligne-joueur">
+                <th scope="col">Nom</th>
+                <th scope="col">Prenom</th>
+                <th scope="col">Poste</th>
+                <th scope="col">Taille</th>
+                <th scope="col">Poids</th>
+                <th scope="col">commentaire</th>
+                <th scope ="col">evaluations</th>
+            </tr>
+        </thead>
+        <tbody>
             <tr>
-                <td><input type="select" name="titulaire">
-                    <? foreach($Joueur as $j ): ?>
-                    <option valeur= $1><? htmlspecialchars($j['nom']) ?></option>
-                    <? $i = $i+1; ?></td>
-                <td><input type= "select" name="poste"></td>
-                        <? $daoParticipe = new ParticipeDAO();
-                        $p = $daoParticipe->obtenirTous();
-                        foreach($p as $pa): ?>
-                            <option valeur = poste><? htmlspecialchars($pa['poste'])?></option></td>
-                <td><?=htmlspecialchars($j['taille']) ?></td>
-                <td><?htmlspecialchars($j('poids')) ?></td>
+                <td>
+                <select name="nomTitu" class="select-joueur">
+                    <option value="">-- Nom --</option>
+                    <?php foreach ($joueurs as $j): ?>
+                        <option value="<?= $j['nom'] ?>"><?= htmlspecialchars($j['nom']) ?></option>
+                    <?php endforeach; ?>
+                </select>
+                    </td>
+            </tr>
+        </tbody>
+        
+    </table>
 
+    <h2>Remplaçants (minimum 5)</h2>
+    <table class="feuille-table">
+        <thead>
+            <tr class="ligne-joueur">
+                <th scope="col">Nom</th>
+                <th scope="col">Prenom</th>
+                <th scope="col">Poste</th>
+                <th scope="col">Taille</th>
+                <th scope="col">Poids</th>
+                <th scope="col">commentaire</th>
+                <th scope ="col">evaluations</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                <select name="nomTitu" class="select-joueur">
+                    <option value="">-- Nom --</option>
+                    <?php foreach ($joueurs as $j): ?>
+                        <option value="<?= $j['nom'] ?>"><?= htmlspecialchars($j['nom']) ?></option>
+                    <?php endforeach; ?>
+                </select>
+                    </td>
+            </tr>
+        </tbody>
+        
+    </table>
+    
+    <button type="submit" id="btn-valider">Valider la feuille</button>
+</form>
 
               
             

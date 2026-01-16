@@ -30,65 +30,59 @@ $connectionBD = new ConnectionBD();
 $pdo = $connectionBD->getConnection();
 $matchDAO = new MatchDAO(); 
 $listeMatchs = $matchDAO->obtenirTous();
+
 foreach ($listeMatchs as $match): ?>
-
 <section class="match-card">
-
     <div class="match-date">
         <strong><?= date('D d M', strtotime($match['DATE_'])) ?></strong><br>
         <?= substr($match['HEURE'], 0, 5) ?>
     </div>
 
     <div class="match-opponent">
-        VS <strong><?= $match['Nom_adversaire'] ?></strong>
+        VS <strong><?= htmlspecialchars($match['Nom_adversaire']) ?></strong>
     </div>
 
-    <div class="match-location">
-        📍 <?= $match['lieu_rencontre'] ?>
-    </div>
+    <form action="" method="POST">
+        <input type="hidden" name="id_match" value="<?= $match['Id_Match'] ?>">
 
-    <div class="match-result">
-        Résultat : <?= $match['resultat'] ?? 'À venir' ?>
-    </div>
-
-    <input type="submit" name="action" value="Voir feuille du match">
+        <input type="submit" name="action" value="Voir feuille du match">
         <input type="submit" name="action" value="Préparer la feuille de match">
         <input type="submit" name="action" value="Modifier le match">
         <input type="submit" name="action" value="Supprimer le match">
-
-        <?php
-            if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                $action = $_POST['action'];
-
-                switch ($action) {
-                    case "Voir feuille du match":
-                        header("Location: VoirFeuilleMatch.php");
-                        exit();
-
-                    case "Préparer la feuille de match":
-                        header("Location: PreparerFeuilleMatch.php");
-                        exit();
-
-                    case "Modifier le match":
-                        header("Location: modifier_match.php");
-                        exit();
-
-                    case "Supprimer le match":
-                        $matchDAO->delete($match);
-                        exit();
-
-                }
-            }
-        ?>
-
     </form>
-
 </section>
-<input type="submit" name="action" value="Ajouter un match">
-
 <?php endforeach; ?>
 
-</body>
-</html>
+<form action="ajouter_match.php" method="GET">
+    <button type="submit">Ajouter un match</button>
+</form>
 
+<?php
+       $matchDAO = new MatchDAO(); 
 
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action'])) {
+    $action = $_POST['action'];
+    $id_match = $_POST['id_match'];
+
+    switch ($action) {
+        case "Voir feuille du match":
+            header("Location: VoirFeuilleMatch.php?id=" . $id_match);
+            exit();
+
+        case "Préparer la feuille de match":
+            header("Location: PreparerFeuilleMatch.php?id=" . $id_match);
+            exit();
+
+        case "Modifier le match":
+            header("Location: modifier_match.php?id=" . $id_match);
+            exit();
+
+        case "Supprimer le match":
+            $matchDAO->delete($id_match); // Assure-toi que delete accepte l'ID
+            header("Location: afficher_matches.php"); // Rafraîchir
+            exit();
+    }
+}
+
+$listeMatchs = $matchDAO->obtenirTous();
+?>
