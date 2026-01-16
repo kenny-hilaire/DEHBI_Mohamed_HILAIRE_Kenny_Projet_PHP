@@ -77,8 +77,11 @@ th, td {
 }
 
 #title{
-    display: flex;
-    flex-direction : column-reverse;
+   display: flex;
+    flex-direction: column; 
+    align-items: center;
+    padding: 40px 20px;
+    border: none;
 
 }
 #Global_Stats{
