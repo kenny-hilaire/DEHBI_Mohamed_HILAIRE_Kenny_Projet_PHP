@@ -36,16 +36,16 @@ class JoueurDAO {
 
     public function updateInfo(Joueur $joueur, String $nouveauStatut, String $nouveauPostePref, float $nouvelleTaille, float $nouveauPoids ){
             $req = $this->pdo->prepare("
-                UPDATE contact
+                UPDATE joueur
                 SET statut = :nouveauStatut, poste_preferer = :nouveauPostePref, taille = :nouvelleTaille, poids = :nouveauPoids
-                WHERE numero_licence = :numLicence 
+                WHERE Id_Joueur = :Id_Joueur
             ");
             $req->execute([
-                'Id_Joueur' => $joueur->getId_Joueur,
-                'nouveauStatut' =>$nouveauStatut,
-                'taille' => $nouvelleTaille,
-                'poste_preferer' => $nouveauPostePref, 
-                'poids' => $nouveauPoids
+                'Id_Joueur' => $joueur->getId_Joueur(),
+                'nouveauStatut' => $nouveauStatut,
+                'nouveauPostePref' => $nouveauPostePref,
+                'nouvelleTaille' => $nouvelleTaille,
+                'nouveauPoids' => $nouveauPoids
             ]);
         }
 
@@ -62,7 +62,7 @@ class JoueurDAO {
 
     public function select(Joueur $j){
          $req = $this->pdo->prepare("select * from Joueur where Id_Joueur = :Id_Joueur ;");
-		$req ->execute(['Id_Joueur' => $j->getId_Joueur]);
+		$req ->execute(['Id_Joueur' => $j->getId_Joueur()]);
     return $req->fetchAll(PDO::FETCH_ASSOC);
     }
 

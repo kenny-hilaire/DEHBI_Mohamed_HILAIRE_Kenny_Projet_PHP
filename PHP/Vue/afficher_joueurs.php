@@ -1,51 +1,24 @@
+
 <?php
-<<<<<<< HEAD
 require_once '../modele/DaoJoueur.php';
-=======
-<<<<<<< HEAD
-
-require_once '../modele/connexionBD.php'; 
-require_once '../modele/DaoJoueur.php';
-
-if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['action'])) {
-=======
->>>>>>> 60162a88edcf3768765b3c2eedf2db1ee7c83228
 
 /* Gestion des actions du formulaire */
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['action'])) {
-
     switch ($_POST['action']) {
-
         case "Ajouter un joueur":
             header("Location: AjouterJoueur.php");
-            exit();
+            exit;
 
         case "retour au menu":
             header("Location: menuPrincipale.php");
-            exit();
+            exit;
     }
 }
 
-<<<<<<< HEAD
-/* Récupération des joueurs via le DAO */
-=======
+/* Récupération des joueurs */
+$daoJoueur = new JoueurDAO();
+$joueurs = $daoJoueur->obtenirTous();
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
->>>>>>> 12a2730bddd4f53841f01f85783ca67e5e0fabba
-
-    switch ($_POST['action']) {
-
-        case "Ajouter un joueur":
-            header("Location: AjouterJoueur.php");
-            exit();
-        case "retour au menu":
-            header("Location: menuPrincipale.php");
-            exit();
-    }
-}
-$connectionBD = new ConnectionBD();
-$pdo = $connectionBD->getConnection();
->>>>>>> 60162a88edcf3768765b3c2eedf2db1ee7c83228
 $daoJoueur = new JoueurDAO();
 $joueurs = $daoJoueur->obtenirTous();
 ?>
@@ -57,18 +30,8 @@ $joueurs = $daoJoueur->obtenirTous();
 <head>
     <meta charset="UTF-8">
     <title>Liste des joueurs</title>
-<<<<<<< HEAD
-
-       <link rel="stylesheet" href="afficher_joueurs.css.css">
-=======
     <link rel="stylesheet" href="CSS/afficher_joueurs.css">
-<<<<<<< HEAD
-=======
-
->>>>>>> 12a2730bddd4f53841f01f85783ca67e5e0fabba
->>>>>>> 60162a88edcf3768765b3c2eedf2db1ee7c83228
 </head>
-
 <body>
 
 <nav>
