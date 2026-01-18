@@ -49,7 +49,7 @@ class Fonction_utiles {
         $total = $this->pdo->query("SELECT COUNT(*) FROM Match_")->fetchColumn();
         if ($total == 0) return 0;
 
-        $sql = "SELECT count(*) FROM Match_ WHERE resultat = 'egalte'";
+        $sql = "SELECT count(*) FROM Match_ WHERE resultat = 'Match Nul'";
         $draws = $this->pdo->query($sql)->fetchColumn();
 
         return round(($draws / $total) * 100, 2);
@@ -60,7 +60,7 @@ class Fonction_utiles {
         $total = $this->pdo->query("SELECT COUNT(*) FROM Match_")->fetchColumn();
         if ($total == 0) return 0;
 
-        $sql = "SELECT count(*) FROM Match_ WHERE resultat = 'perdu'"; // Corrigé 'egalte' du SQL original
+        $sql = "SELECT count(*) FROM Match_ WHERE resultat = 'Défaite'"; // Corrigé 'egalte' du SQL original
         $perdus = $this->pdo->query($sql)->fetchColumn();
 
         return round(($perdus / $total) * 100, 2);
