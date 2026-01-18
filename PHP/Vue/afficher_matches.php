@@ -49,13 +49,11 @@ foreach ($listeMatchs as $match): ?>
         <input type="submit" name="action" value="Préparer la feuille de match">
         <input type="submit" name="action" value="Modifier le match">
         <input type="submit" name="action" value="Supprimer le match">
+        <input type="submit" name="action" value="ajouter un match">
+
     </form>
 </section>
 <?php endforeach; ?>
-
-<form action="ajouter_match.php" method="GET">
-    <button type="submit">Ajouter un match</button>
-</form>
 
 <?php
        $matchDAO = new MatchDAO(); 
@@ -70,7 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action'])) {
             exit();
 
         case "Préparer la feuille de match":
-            header("Location: PreparerFeuilleMatch.php?id=" . $id_match);
+            header("Location:PreparerFeuilleDeMatch.php?id=" . $id_match);
             exit();
 
         case "Modifier le match":
@@ -80,6 +78,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action'])) {
         case "Supprimer le match":
             $matchDAO->delete($id_match); // Assure-toi que delete accepte l'ID
             header("Location: afficher_matches.php"); // Rafraîchir
+            exit();
+        
+        case "ajouter un match":
+             header("Location: AjouterMatche.php?id=" . $id_match);
             exit();
     }
 }

@@ -35,15 +35,15 @@ class Participe
     }
 
   
-    public function getIdParticipation(): int {
+    public function getIdParticipation(): string {
         return $this->idParticipation;
     }
 
-    public function getIdJoueur(): int {
+    public function getIdJoueur(): string {
         return $this->idJoueur;
     }
 
-    public function getIdMatch(): int {
+    public function getIdMatch(): string {
         return $this->idMatch;
     }
 

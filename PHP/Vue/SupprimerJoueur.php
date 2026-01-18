@@ -1,22 +1,18 @@
 <?php
+require_once '../modele/DaoJoueur.php';
 
-$pdo = new PDO("mysql:host=localhost;dbname=php_projet;charset=utf8","root","",[PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
-
-
-if (!isset($_GET['id'])) {
-    die("ID du joueur manquant.");
+// Vérification ID
+if (!isset($_GET['id']) || empty($_GET['id'])) {
+    header('Location: afficher_joueurs.php');
+    exit;
 }
 
 $id = $_GET['id'];
-
-
-if (isset($_POST['confirmer'])) {
-
-    $sql = "DELETE FROM joueur WHERE Id_Joueur = ?";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute([$id]);
-
-    header("Location: afficher_joueurs.php");
+$dao = new JoueurDAO();
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirmer'])) {
+    echo "ID à supprimer = " . $id;
+    $dao->delete($id);
+    header('Location: afficher_joueurs.php');
     exit;
 }
 ?>
@@ -30,11 +26,12 @@ if (isset($_POST['confirmer'])) {
 </head>
 <body>
 
-
 <h1>Supprimer un joueur</h1>
 
 <div class="confirm-card">
-    <p class="warning-text"> Voulez-vous vraiment supprimer ce joueur ?</p>
+    <p class="warning-text">
+        ⚠️ Voulez-vous vraiment supprimer ce joueur ?
+    </p>
 
     <form method="post" class="confirm-actions">
         <input type="submit" name="confirmer" value="Oui, supprimer" class="btn-danger">

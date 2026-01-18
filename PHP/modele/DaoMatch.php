@@ -1,5 +1,5 @@
 <?php
-require_once 'Match.php'; 
+require_once 'Match.php';
 require_once '../modele/connexionBD.php';
 
 class MatchDAO {
@@ -10,58 +10,54 @@ class MatchDAO {
         $this->pdo = $connection->getConnection();
     }
 
-public function insert(Match_ $m){
-     $req = $this->pdo->prepare('
-            INSERT INTO Match_ (Id_Match, date_Match, Heure_Match, Nom_adversaire,  resultat, lieu_rencontre)
-            VALUES (:Id_Match and :date_Match and :Heure_Match and
-             :Nom_adversaire and :resultat
-             and :lieu_rencontre)
-        ');
-        // à modifier
+    public function insert(Match_ $m){
+        $req = $this->pdo->prepare("
+            INSERT INTO Match_
+            (Id_Match, DATE_, HEURE, Nom_adversaire, resultat, lieu_rencontre)
+            VALUES (:Id_Match, :DATE_, :HEURE, :Nom_adversaire, :resultat, :lieu_rencontre)
+        ");
+
         $req->execute([
-            'Id_Match' => $m->getId_Match(),
-            'date_Match' => $m->getDateMatch(),
-            'Heure_Match' => $m->getHeureMatch(),
-            'Nom_adversaire' => $m->getNom_Adversaire(),
-            'resultat' => $m->getResultat(),
-            'lieu_rencontre' => $m->getLieuRencontre()
+            ':Id_Match' => $m->getId_Match(),
+            ':DATE_' => $m->getDateMatch(),
+            ':HEURE' => $m->getHeureMatch(),
+            ':Nom_adversaire' => $m->getNom_Adversaire(),
+            ':resultat' => $m->getResultat(),
+            ':lieu_rencontre' => $m->getLieuRencontre()
         ]);
-}
+    }
 
-
- 
-
-public function updateInfo(Match_ $p,  DATE $date_Match, String $Heure_Match){
+    public function updateInfo(Match_ $m, string $dateMatch, string $heureMatch){
         $req = $this->pdo->prepare("
             UPDATE Match_
-            SET date_Match = :date_Match, Heure_Match = :Heure_Match
-            WHERE Id_Match = :$p->getId_Match()
-
+            SET DATE_ = :DATE_, HEURE = :HEURE
+            WHERE Id_Match = :Id_Match
         ");
+
         $req->execute([
-            'Id_Match' => $p->getId_Match(),
-            'date_Match' => $date_Match,
-            'Heure_Match' => $Heure_Match
+            ':Id_Match' => $m->getId_Match(),
+            ':DATE_' => $dateMatch,
+            ':HEURE' => $heureMatch
         ]);
-}
-
-    public function delete(Match_ $m){
-        $sup = $this->pdo->prepare("delete from Participe where Id_Joueur = :Id_Joueur and Id_Match = : Id_Match");
-    $sup -> execute([
-	'Id_Match' =>$m->getId_Match()]);
     }
 
-
-    public function select(Match_ $m){
-         $req = $this->pdo->prepare("select * from Match_ where Id_Match = :Id_Match;");
-		$req ->execute(['Id_Match' =>$m->getIdMatch() ]);
-    return $req->fetchAll(PDO::FETCH_ASSOC);
+    public function delete(string $idMatch){
+        $req = $this->pdo->prepare("DELETE FROM Match_ WHERE Id_Match = :Id_Match");
+        $req->execute([
+            ':Id_Match' => $idMatch
+        ]);
     }
 
-
+    public function findById(string $idMatch){
+        $req = $this->pdo->prepare("SELECT * FROM Match_ WHERE Id_Match = :Id_Match");
+        $req->execute([
+            ':Id_Match' => $idMatch
+        ]);
+        return $req->fetch(PDO::FETCH_ASSOC);
+    }
 
     public function obtenirTous() {
-        $req = $this->pdo->query('SELECT * FROM Match_ ORDER BY Id_Match');
+        $req = $this->pdo->query("SELECT * FROM Match_ ORDER BY DATE_, HEURE");
         return $req->fetchAll(PDO::FETCH_ASSOC);
     }
 }
