@@ -1,0 +1,42 @@
+footer {
+    background-color: #121212; /* Rappel du noir de la nav */
+    color: #ffffff;
+    padding: 30px 20px;
+    margin-top: 50px;
+    text-align: center;
+    border-top: 3px solid #552583; /* Bordure violette pour séparer du contenu */
+}
+
+.footer-content p {
+    margin: 8px 0;
+    font-size: 0.95rem;
+}
+
+.footer-content strong {
+    color: #FDB927; /* On utilise le jaune pour mettre en avant le nom du club */
+}
+
+.footer-links {
+    margin-top: 20px;
+}
+
+.footer-links a {
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: 500;
+    margin: 0 10px;
+    transition: color 0.2s ease;
+}
+
+.footer-links a:hover {
+    color: #FDB927; /* Même effet de survol que dans la nav */
+}
+
+/* Version responsive pour mobile */
+@media (max-width: 600px) {
+    .footer-links {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+}

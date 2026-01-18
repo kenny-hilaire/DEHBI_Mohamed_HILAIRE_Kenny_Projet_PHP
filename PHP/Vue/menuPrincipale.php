@@ -1,9 +1,10 @@
 <?php
 session_start();
-    
-if (!isset($_SESSION['auth']) || $_SESSION['auth'] !== true ){
-    header("Location: Connexion.php"); // ou index.php selon ton nom de page
-    exit;
+
+// Si la variable 'auth' n'existe pas ou n'est pas vraie, on dégage l'intrus
+if (!isset($_SESSION['auth']) || $_SESSION['auth'] !== true) {
+    header("Location: Connexion.php");
+    exit();
 }
 
 // si c'est la 1er fois que je viens mon compteur vaut 0
@@ -21,7 +22,7 @@ else {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestion d'une équipe de sport</title>
-    <link rel="stylesheet" href="CSS/menuPrincipale.css">
+    <link rel="stylesheet" href="CSS/mp.css">
 </head>
 <body>
     <h1> Content de vous revoir coach, à vous de jouer maintenant!!</h1>

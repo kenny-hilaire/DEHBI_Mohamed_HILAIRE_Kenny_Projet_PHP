@@ -1,92 +1,90 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
-}
-
-/* Fond général */
-
-    
-body {
-    background-color: red ;
-
-
-    min-height: 100vh;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-color: #111;
-
-    color: #fff;
-    padding: 40px;
-}
-
-/* Titre principal */
+/* --- Style du titre principal --- */
 h1 {
     text-align: center;
-    color: #ff7a00;
-    margin-bottom: 50px;
+    color: #ff6600; /* Orange Basket */
+    font-size: 2rem;
+    margin: 40px 20px;
+    font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
 
-/* Section menu */
+/* --- Le conteneur du menu --- */
 .menu {
     display: flex;
     justify-content: center;
-    gap: 40px;
+    align-items: stretch;
     flex-wrap: wrap;
+    gap: 30px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto 50px auto;
 }
 
-/* Cartes (même style pour les 3) */
-.menu > div {
-    width: 300px;
-    background-color: rgba(0, 0, 0, 0.85);
-    border: 3px solid #ff7a00;
-    border-radius: 10px;
+/* --- Les cartes (Match, Joueur, Stat) --- */
+.feuilleMatch, .listeJoueur, .statistique {
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    width: 320px;
     padding: 20px;
     text-align: center;
-
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #eee;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-/* Effet hover */
-.menu > div:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 0 20px rgba(255, 122, 0, 0.6);
+.feuilleMatch:hover, .listeJoueur:hover, .statistique:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 30px rgba(255, 102, 0, 0.2); /* Ombre orangée au survol */
 }
 
-/* Images */
+/* --- Style des images --- */
 .mp {
     width: 100%;
     height: 180px;
-    object-fit: cover;
-    border-radius: 6px;
+    object-fit: cover; /* Pour que les images gardent leurs proportions */
+    border-radius: 10px;
     margin-bottom: 15px;
-    border: 2px solid #ff7a00;
 }
 
-/* Titres des cartes */
-.menu h3 {
-    color: #fff;
-    margin-bottom: 20px;
-    font-size: 18px;
+/* --- Les titres dans les cartes --- */
+h3 {
+    font-size: 1.2rem;
+    color: #333;
+    margin: 15px 0;
+    min-height: 50px; /* Aligne les titres même s'ils ont des longueurs différentes */
 }
 
-/* Boutons */
+/* --- Le bouton "Acceder" (Orange et Blanc) --- */
 .menu input[type="submit"] {
-    padding: 10px 25px;
-    background-color: #ff7a00;
-    color: #000;
-    font-weight: bold;
+    background-color: #ff6600; /* Orange */
+    color: #ffffff; /* Blanc */
     border: none;
-    border-radius: 5px;
-    cursor: pointer;
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 700;
     text-transform: uppercase;
-    transition: background-color 0.3s ease;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease, letter-spacing 0.2s;
 }
 
 .menu input[type="submit"]:hover {
-    background-color: #ff9a33;
+    background-color: #e65c00; /* Orange plus foncé */
+    letter-spacing: 1px;
+}
+
+/* --- Responsive (Mobile) --- */
+@media (max-width: 768px) {
+    .menu {
+        flex-direction: column;
+        align-items: center;
+    }
+    .feuilleMatch, .listeJoueur, .statistique {
+        width: 90%;
+    }
 }

@@ -2,253 +2,175 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Liste des joueurs</title>
-    <link rel="stylesheet" href="afficher_joueurs.css">
+    <title>Modifier Feuille de Match</title>
+    <link rel="stylesheet" href="CSS/VoirFeuilleMatch.css">
+
 </head>
 <body>
-    <nav>
-        <ul>
-            <li><a href="menuPrincipale.php">Accueil</a></li>
-            <li><a href="afficher_matches.php">🏀Liste de match</a></li>
-            <li><a href="afficher_joueurs.php">👤Joueur</a></li>
-            <li><a href="statistique.php">📊Statistique</a></li>
-            <li>
-                <form action="deconnexion.php" method="POST" style="display:inline;">
-                    <input type="submit" name="Deconnexion" value="Deconnexion">
-                </form>
-            </li>  
-        </ul>
-    </nav>
+    <?php include 'nav.php';     
+session_start();
 
-    <?php
+// Si la variable 'auth' n'existe pas ou n'est pas vraie, on dégage l'intrus
+if (!isset($_SESSION['auth']) || $_SESSION['auth'] !== true) {
+    header("Location: Connexion.php");
+    exit();
+}
     require_once '../modele/connexionBD.php';
     require_once '../modele/DaoMatch.php'; 
     require_once '../modele/DaoJoueur.php';
     require_once '../modele/DaoParticipe.php';
+    require_once '../modele/DaoCommentaire.php';
     require_once '../modele/Participe.php';
+    require_once '../modele/Commentaire.php';
 
     $connectionBD = new ConnectionBD();
     $pdo = $connectionBD->getConnection();
-    $daoJoueur = new JoueurDAO();
     $daoParticipe = new ParticipeDAO();
     $matchDAO = new MatchDAO();
-
-    $Joueur = $daoJoueur->obtenirActifs();
-    
-    // Initialisation des tableaux pour l'affichage
-    $joueursSelectionnesTitu = array_fill(0, 5, '');
-    $joueursSelectionnes = array_fill(0, 7, '');
+    $daoComm = new CommentaireDAO();
 
     $idMatch = $_GET['id'] ?? $_POST['id_match'] ?? null;
-
-    if ($idMatch === null) {
-        die("Match non défini");
-    }
+    if (!$idMatch) die("Match non défini");
 
     $match = $matchDAO->findById($idMatch);
+    $dateMatch = $match['DATE_'];
 
-    // --- LOGIQUE DE TRAITEMENT ---
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        
-        // 1. On récupère toujours les noms pour garder l'affichage lors du onchange
-        if (isset($_POST['nomTitu'])) {
-            $joueursSelectionnesTitu = $_POST['nomTitu'];
-        }
-        if (isset($_POST['nomRempl'])) {
-            $joueursSelectionnes = $_POST['nomRempl'];
-        }
+    // --- TRAITEMENT DU UPDATE ---
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btn_update'])) {
+        $ids = $_POST['id_joueur']; 
+        $postes = $_POST['poste'];
+        $evals = $_POST['evaluation'];
+        $statuts = $_POST['statut'];
+        $notes = $_POST['commentaire'];
 
-        // 2. INSERTION : Uniquement si on a cliqué sur le bouton VALIDER
-        // Cela empêche l'insertion lors du simple "onchange"
-        if (isset($_POST['btn_valider'])) {
-            
-            // Fusion des données pour le traitement
-            $joueursFinal = [
-                'TITULAIRE' => [
-                    'nom' => $_POST['nomTitu'] ?? [],
-                    'poste' => $_POST['posteTitu'] ?? [],
-                    'evaluation' => $_POST['evaluationTitu'] ?? []
-                ],
-                'REMPLACANT' => [
-                    'nom' => $_POST['nomRempl'] ?? [],
-                    'poste' => $_POST['posteRempl'] ?? [],
-                    'evaluation' => $_POST['evaluationRempl'] ?? []
-                ]
-            ];
+        for ($i = 0; $i < count($ids); $i++) {
+            // Update participation
+            $objetP = new Participe($ids[$i], $idMatch, $postes[$i], $evals[$i], $statuts[$i], "");
+            $daoParticipe->updateInfo($objetP, $postes[$i], $statuts[$i], $evals[$i]);
 
-            foreach ($joueursFinal as $statut => $donnees) {
-                for ($i = 0; $i < count($donnees['nom']); $i++) {
-                    $nom = $donnees['nom'][$i];
-                    if (!empty($nom)) {
-                        $joueurTrouve = $daoJoueur->findByNom($nom);
-                        if ($joueurTrouve) {
-                            $idJoueur = $joueurTrouve['Id_Joueur'];
-                            $poste = $donnees['poste'][$i] ?? '';
-                            $evaluation = $donnees['evaluation'][$i] ?? '';
-                            $idParticipation = uniqid('P');
+            // Update ou Insert Commentaire
+            if (!empty($notes[$i])) {
+                $check = $pdo->prepare("SELECT Id_Commentaire FROM Commentaire WHERE Id_Joueur = ? AND date_comm = ?");
+                $check->execute([$ids[$i], $dateMatch]);
+                $exist = $check->fetch();
 
-                            $participe = new Participe(
-                                $idJoueur,
-                                $idMatch,
-                                $poste,
-                                $evaluation,
-                                $statut,
-                                $idParticipation
-                            );
-
-                            $daoParticipe->insert($participe);
-                        }
-                    }
-                }
+            if ($exist) {
+                $daoComm->updateParJoueurEtDate($ids[$i], $dateMatch, $notes[$i]);
+            } else {
+                // Plus besoin de uniqid('C') !
+                // On passe 0 ou null comme premier argument
+                $newComm = new Commentaire(0, $notes[$i], $dateMatch, $ids[$i]);
+                $daoComm->insert($newComm);
             }
-            // Redirection pour éviter les doublons au rafraîchissement (F5)
-            header("Location: afficher_matches.php?status=ok");
-            exit();
+            }
         }
+        echo "<p>✅ Modifications et commentaires enregistrés !</p>";
     }
 
-    $joueursPris = array_filter(array_merge(
-        $joueursSelectionnesTitu,
-        $joueursSelectionnes
-    ));
+    // --- RÉCUPÉRATION ---
+    $sql = "SELECT p.*, j.nom, j.prenom, c.notes_perso 
+            FROM Participe p 
+            JOIN Joueur j ON p.Id_Joueur = j.Id_Joueur 
+            LEFT JOIN Commentaire c ON (j.Id_Joueur = c.Id_Joueur AND c.date_comm = :dateM)
+            WHERE p.Id_Match = :idM";
+            
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute(['idM' => $idMatch, 'dateM' => $dateMatch]);
+    $participations = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    $titulaires = array_filter($participations, function($p) { return strtoupper($p['titulaire_ou_remplacant']) === 'TITULAIRE'; });
+    $remplacants = array_filter($participations, function($p) { return strtoupper($p['titulaire_ou_remplacant']) !== 'TITULAIRE'; });
     ?>
 
+    <h2>Feuille de Match : vs <?= htmlspecialchars($match['Nom_adversaire']) ?></h2>
+
     <form action="VoirFeuilleMatch.php?id=<?= urlencode($idMatch) ?>" method="POST">
-        <h2>
-            Match vs <?= htmlspecialchars($match['Nom_adversaire']) ?>
-            (<?= $match['DATE_'] ?> à <?= substr($match['HEURE'], 0, 5) ?>)
-        </h2>
-
-        <h2>Titulaires (5)</h2>
-        <table class="feuille-table">
-            <thead>
-                <tr class="ligne-joueur">
-                    <th>Nom</th>
-                    <th>Prenom</th>
-                    <th>Poste</th>
-                    <th>Taille</th>
-                    <th>Poids</th>
-                    <th>Commentaire</th>
-                    <th>Evaluations</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php for ($i = 0; $i < 5; $i++): ?>
-                <tr>
-                    <td>
-                        <select name="nomTitu[]" onchange="this.form.submit()">
-                            <option value="">-- Nom --</option>
-                            <?php foreach ($Joueur as $j): 
-                                $estDejaPris = in_array($j['nom'], $joueursPris) && $joueursSelectionnesTitu[$i] !== $j['nom'];
-                                if (!$estDejaPris): ?>
-                                <option value="<?= $j['nom'] ?>" <?= ($joueursSelectionnesTitu[$i] == $j['nom']) ? 'selected' : '' ?>>
-                                    <?= htmlspecialchars($j['nom']) ?>
-                                </option>
-                                <?php endif; ?>
-                            <?php endforeach; ?>
-                        </select>
-                    </td>
-                    <?php
-                    $infosTitu = null;
-                    if (!empty($joueursSelectionnesTitu[$i])) {
-                        $infosTitu = $daoJoueur->findByNom($joueursSelectionnesTitu[$i]);
-                    }
-                    ?>
-                    <td><?= htmlspecialchars($infosTitu['prenom'] ?? '') ?></td>
-                    <td>
-                        <select name="posteTitu[]" class="select-joueur">
-                            <option value="">-- Poste --</option>
-                            <option value="Meneur">Meneur</option>
-                            <option value="Arrière">Arrière</option>
-                            <option value="Ailier">Ailier</option>
-                            <option value="Ailier Fort">Ailier Fort</option>
-                            <option value="Pivot">Pivot</option>
-                        </select>
-                    </td>
-                    <td><?= htmlspecialchars($infosTitu['taille'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($infosTitu['poids'] ?? '') ?></td>
-                    <td><textarea name="commentaireTitu[]" rows="2" cols="15"></textarea></td>
-                    <td>
-                        <select name="evaluationTitu[]">
-                            <option value="">-- Note --</option>
-                            <option value="1">⭐</option>
-                            <option value="2">⭐⭐</option>
-                            <option value="3">⭐⭐⭐</option>
-                            <option value="4">⭐⭐⭐⭐</option>
-                            <option value="5">⭐⭐⭐⭐⭐</option>
-                        </select>
-                    </td>
-                </tr>
-                <?php endfor; ?>
-            </tbody>
-        </table>
-
-        <h2>Remplaçants (minimum 5)</h2>
-        <table class="feuille-table">
-            <thead>
-                <tr class="ligne-joueur">
-                    <th>Nom</th>
-                    <th>Prenom</th>
-                    <th>Poste</th>
-                    <th>Taille</th>
-                    <th>Poids</th>
-                    <th>Commentaire</th>
-                    <th>Evaluations</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php for ($t = 0; $t < 5; $t++): ?>
-                <tr>
-                    <td>
-                        <select name="nomRempl[]" class="select-joueur" onchange="this.form.submit()">
-                            <option value="">-- Nom --</option>
-                            <?php foreach ($Joueur as $j): 
-                                $estDejaPris = in_array($j['nom'], $joueursPris) && $joueursSelectionnes[$t] !== $j['nom'];
-                                if (!$estDejaPris): ?>
-                                <option value="<?= $j['nom'] ?>" <?= (isset($joueursSelectionnes[$t]) && $joueursSelectionnes[$t] === $j['nom']) ? 'selected' : '' ?>>
-                                    <?= htmlspecialchars($j['nom']) ?>
-                                </option>
-                                <?php endif; ?>
-                            <?php endforeach; ?>
-                        </select>
-                    </td>
-                    <?php
-                    $infosRempl = null;
-                    if (!empty($joueursSelectionnes[$t])) {
-                        $infosRempl = $daoJoueur->findByNom($joueursSelectionnes[$t]);
-                    }
-                    ?>
-                    <td><?= htmlspecialchars($infosRempl['prenom'] ?? '') ?></td>
-                    <td>
-                        <select name="posteRempl[]" class="select-joueur">
-                            <option value="">-- Poste --</option>
-                            <option value="Meneur">Meneur</option>
-                            <option value="Arrière">Arrière</option>
-                            <option value="Ailier">Ailier</option>
-                            <option value="Ailier Fort">Ailier Fort</option>
-                            <option value="Pivot">Pivot</option>
-                        </select>
-                    </td>
-                    <td><?= htmlspecialchars($infosRempl['taille'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($infosRempl['poids'] ?? '') ?></td>
-                    <td><textarea name="commentaireRempl[]" rows="2" cols="15"></textarea></td>
-                    <td>
-                        <select name="evaluationRempl[]">
-                            <option value="">-- Note --</option>
-                            <option value="1">⭐</option>
-                            <option value="2">⭐⭐</option>
-                            <option value="3">⭐⭐⭐</option>
-                            <option value="4">⭐⭐⭐⭐</option>
-                            <option value="5">⭐⭐⭐⭐⭐</option>
-                        </select>
-                    </td>
-                </tr>
-                <?php endfor; ?>
-            </tbody>
-        </table>
-
         <input type="hidden" name="id_match" value="<?= htmlspecialchars($idMatch) ?>">
-        <button type="submit" id="btn-valider" name="btn_valider">Valider la feuille</button>
+
+        <h3>Titulaires</h3>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Nom / Prénom</th>
+                    <th>Poste</th>
+                    <th>Évaluation</th>
+                    <th>Commentaire</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($titulaires as $p): ?>
+                <tr>
+                    <td><?= htmlspecialchars($p['nom'] . " " . $p['prenom']) ?></td>
+                    <input type="hidden" name="id_joueur[]" value="<?= $p['Id_Joueur'] ?>">
+                    <input type="hidden" name="statut[]" value="Titulaire">
+                    <td>
+                        <select name="poste[]">
+                            <option value="Meneur" <?= $p['poste'] == 'Meneur' ? 'selected' : '' ?>>Meneur</option>
+                            <option value="Arrière" <?= $p['poste'] == 'Arrière' ? 'selected' : '' ?>>Arrière</option>
+                            <option value="Ailier" <?= $p['poste'] == 'Ailier' ? 'selected' : '' ?>>Ailier</option>
+                            <option value="Ailier Fort" <?= $p['poste'] == 'Ailier Fort' ? 'selected' : '' ?>>Ailier Fort</option>
+                            <option value="Pivot" <?= $p['poste'] == 'Pivot' ? 'selected' : '' ?>>Pivot</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select name="evaluation[]">
+                            <?php for($i=1; $i<=5; $i++): ?>
+                                <option value="<?= $i ?>" <?= $p['evaluation_perf'] == $i ? 'selected' : '' ?>><?= $i ?> ⭐</option>
+                            <?php endfor; ?>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="text" name="commentaire[]" value="<?= htmlspecialchars($p['notes_perso'] ?? '') ?>">
+                    </td>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+
+        <h3>Remplaçants</h3>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Nom / Prénom</th>
+                    <th>Poste</th>
+                    <th>Évaluation</th>
+                    <th>Commentaire</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($remplacants as $p): ?>
+                <tr>
+                    <td><?= htmlspecialchars($p['nom'] . " " . $p['prenom']) ?></td>
+                    <input type="hidden" name="id_joueur[]" value="<?= $p['Id_Joueur'] ?>">
+                    <input type="hidden" name="statut[]" value="Remplacant">
+                    <td>
+                        <select name="poste[]">
+                            <option value="Meneur" <?= $p['poste'] == 'Meneur' ? 'selected' : '' ?>>Meneur</option>
+                            <option value="Arrière" <?= $p['poste'] == 'Arrière' ? 'selected' : '' ?>>Arrière</option>
+                            <option value="Ailier" <?= $p['poste'] == 'Ailier' ? 'selected' : '' ?>>Ailier</option>
+                            <option value="Ailier Fort" <?= $p['poste'] == 'Ailier Fort' ? 'selected' : '' ?>>Ailier Fort</option>
+                            <option value="Pivot" <?= $p['poste'] == 'Pivot' ? 'selected' : '' ?>>Pivot</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select name="evaluation[]">
+                            <?php for($i=1; $i<=5; $i++): ?>
+                                <option value="<?= $i ?>" <?= $p['evaluation_perf'] == $i ? 'selected' : '' ?>><?= $i ?> ⭐</option>
+                            <?php endfor; ?>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="text" name="commentaire[]" value="<?= htmlspecialchars($p['notes_perso'] ?? '') ?>">
+                    </td>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+
+        <br>
+        <button type="submit" name="btn_update">Mettre à jour la feuille</button>
+        <a href="afficher_matches.php">Retour</a>
     </form>
+    <?php include 'footer.php'; ?>
 </body>
 </html>

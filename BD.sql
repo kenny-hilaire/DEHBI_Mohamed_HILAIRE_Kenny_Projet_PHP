@@ -38,7 +38,8 @@ CREATE TABLE Participe(
 CREATE TABLE Commentaire(
    Id_Commentaire VARCHAR(50),
    notes_perso VARCHAR(50),
-   date_comm   DATE
+   date_comm   DATE, 
+   Id_Joueur VARCHAR(50)
 );
 
 INSERT INTO Joueur VALUES

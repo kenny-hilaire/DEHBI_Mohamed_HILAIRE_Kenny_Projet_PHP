@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
         $matchDAO->insert($nouveauMatch);
         // Redirection vers la liste des matchs
-        header("Location: ../vue/afficher_matches.php?status=success");
+        header("Location: ../Vue/afficher_matches.php?status=success");
         exit();
     } catch (Exception $e) {
         echo "Erreur lors de l'insertion : " . $e->getMessage();

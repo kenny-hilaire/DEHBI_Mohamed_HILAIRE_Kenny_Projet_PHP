@@ -1,4 +1,11 @@
 <?php
+session_start();
+
+// Si la variable 'auth' n'existe pas ou n'est pas vraie, on dégage l'intrus
+if (!isset($_SESSION['auth']) || $_SESSION['auth'] !== true) {
+    header("Location: Connexion.php");
+    exit();
+}
 require_once '../modele/DaoJoueur.php';
 
 // Vérification ID
@@ -24,20 +31,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirmer'])) {
     <title>Supprimer joueur</title>
     <link rel="stylesheet" href="CSS/supprimer_joueur.css">
 </head>
-<body>
+    <body>
+        <?php include 'nav.php'; ?>
+        <h1>Supprimer un joueur</h1>
 
-<h1>Supprimer un joueur</h1>
+        <div class="confirm-card">
+            <p class="warning-text">
+                ⚠️ Voulez-vous vraiment supprimer ce joueur ?
+            </p>
 
-<div class="confirm-card">
-    <p class="warning-text">
-        ⚠️ Voulez-vous vraiment supprimer ce joueur ?
-    </p>
-
-    <form method="post" class="confirm-actions">
-        <input type="submit" name="confirmer" value="Oui, supprimer" class="btn-danger">
-        <a href="afficher_joueurs.php" class="btn-cancel">Annuler</a>
-    </form>
-</div>
-
-</body>
+            <form method="post" class="confirm-actions">
+                <input type="submit" name="confirmer" value="Oui, supprimer" class="btn-danger">
+                <a href="afficher_joueurs.php" class="btn-cancel">Annuler</a>
+            </form>
+        </div>
+        <?php include 'footer.php'; ?>
+    </body>
 </html>

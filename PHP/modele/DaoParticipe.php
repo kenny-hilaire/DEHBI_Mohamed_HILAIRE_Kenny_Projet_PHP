@@ -50,6 +50,12 @@ class ParticipeDAO {
         ]);
     }
 
+    public function existeDeja(string $idMatch): bool {
+    $req = $this->pdo->prepare("SELECT COUNT(*) FROM Participe WHERE Id_Match = :idM");
+    $req->execute(['idM' => $idMatch]);
+    return $req->fetchColumn() > 0;
+}
+
     public function select(Participe $p) {
         $req = $this->pdo->prepare("SELECT * FROM Participe WHERE Id_Joueur = :Id_Joueur AND Id_Match = :Id_Match");
         $req->execute([

@@ -1,0 +1,105 @@
+/* --- Base --- */
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* Fond clair et lumineux */
+    background-color: #f0f2f5; 
+    color: #333;
+}
+
+/* --- Carte de Connexion --- */
+.container {
+    background: #ffffff;
+    width: 100%;
+    max-width: 400px;
+    padding: 40px;
+    border-radius: 20px;
+    /* Ombre très douce pour un effet flottant */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    /* Rappel des couleurs sur les bords */
+    border-top: 5px solid #552583;
+    border-bottom: 5px solid #FDB927;
+}
+
+h1 {
+    color: #552583;
+    text-align: center;
+    font-size: 1.6rem;
+    font-weight: 800;
+    margin-bottom: 35px;
+    text-transform: uppercase;
+}
+
+/* --- Formulaire --- */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    color: #666;
+    font-weight: 700;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    margin-left: 2px;
+}
+
+input[type="text"], 
+input[type="password"] {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 1rem;
+    background: #fdfdfd;
+    box-sizing: border-box;
+    transition: all 0.2s ease;
+}
+
+input:focus {
+    outline: none;
+    border-color: #552583;
+    background: #fff;
+    /* Petit halo violet très léger */
+    box-shadow: 0 0 0 3px rgba(85, 37, 131, 0.1);
+}
+
+/* --- Bouton Connecter --- */
+input[type="submit"] {
+    background-color: #552583;
+    color: #FDB927;
+    border: none;
+    padding: 16px;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: #401b63;
+    box-shadow: 0 4px 12px rgba(85, 37, 131, 0.2);
+}
+
+/* --- Message d'erreur --- */
+.error-msg {
+    color: #d32f2f;
+    background: #fff1f0;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border: 1px solid #ffa39e;
+}

@@ -1,0 +1,98 @@
+/* --- Titre principal avec dégradé --- */
+h1 {
+    text-align: center;
+    background: linear-gradient(45deg, #552583, #ff6600);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 2.2rem;
+    margin: 40px 20px;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+/* --- Le conteneur du menu --- */
+.menu {
+    display: flex;
+    justify-content: center;
+    gap: 35px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto 60px auto;
+    flex-wrap: wrap;
+}
+
+/* --- Les cartes (Design "Elite") --- */
+.feuilleMatch, .listeJoueur, .statistique {
+    background-color: #ffffff;
+    border-radius: 20px;
+    width: 340px;
+    padding: 0; /* On gère le padding en interne pour l'image */
+    text-align: center;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    overflow: hidden; /* Pour que l'image épouse les bords arrondis */
+    display: flex;
+    flex-direction: column;
+}
+
+.feuilleMatch:hover, .listeJoueur:hover, .statistique:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 20px 40px rgba(85, 37, 131, 0.15);
+    border-color: #FDB927; /* Bordure devient jaune au survol */
+}
+
+/* --- Zone Image avec overlay --- */
+.mp {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-bottom: 5px solid #FDB927; /* Ligne jaune sous l'image */
+}
+
+/* --- Contenu de la carte --- */
+.menu h3 {
+    font-size: 1.1rem;
+    color: #552583; /* Titre en Violet */
+    padding: 20px 15px;
+    font-weight: 700;
+    margin: 0;
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* --- Bouton "Acceder" Multicolore --- */
+.menu form {
+    padding: 0 20px 25px 20px;
+}
+
+.menu input[type="submit"] {
+    background: linear-gradient(to right, #ff6600, #FDB927); /* Dégradé Orange vers Jaune */
+    color: #ffffff;
+    border: none;
+    padding: 14px;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    cursor: pointer;
+    width: 100%;
+    box-shadow: 0 4px 15px rgba(255, 102, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.menu input[type="submit"]:hover {
+    background: #552583; /* Devient Violet au survol */
+    box-shadow: 0 6px 20px rgba(85, 37, 131, 0.4);
+    transform: scale(1.02);
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+    .menu {
+        flex-direction: column;
+        align-items: center;
+    }
+}

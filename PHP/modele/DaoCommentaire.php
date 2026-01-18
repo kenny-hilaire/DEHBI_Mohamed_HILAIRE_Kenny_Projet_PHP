@@ -1,45 +1,41 @@
 <?php
-require_once 'ConnectionBD.php'; 
+require_once 'connexionBD.php'; 
 
 class CommentaireDAO {
     private $pdo;
 
     public function __construct() {
-        // ✅ On instancie ConnectionBD et on récupère le PDO
         $connection = new ConnectionBD();
         $this->pdo = $connection->getConnection();
     }
 
-public function insert(Commentaire $c){
-     $req = $this->pdo->prepare('
-            INSERT INTO Commenatire (Id_Commentaire, notes_perso, date_comm, Id_Joueur)
-            VALUES (:Id_Commentaire and :notes_perso and
-             :date_comm and :Id_Joueur
-            )
-        ');
-        // à modifier
-        $req->execute([
-            'Id_Commentaire' => $c->getIdCommentaire(),
-            'notes_perso' => $c->getNotes_perso(),
-            'date_comm' => $c->getDate_comm(),
-            'Id_Joueur' => $c->getId_Joueur()
-        ]);
+    public function insert(Commentaire $c) {
+    // On retire Id_Commentaire de la liste des colonnes et des valeurs
+    $req = $this->pdo->prepare('
+        INSERT INTO Commentaire (notes_perso, date_comm, Id_Joueur)
+        VALUES (:notes, :date_c, :id_j)
+    ');
+    $req->execute([
+        'notes'  => $c->getNotes_perso(),
+        'date_c' => $c->getDate_comm(),
+        'id_j'   => $c->getId_Joueur()
+    ]);
 }
 
-
- 
-
-public function updateInfo(Commentaire $c, String $notes_perso ){
+    public function updateParJoueurEtDate(string $idJoueur, string $date, string $notes) {
+        // On cherche s'il existe déjà un commentaire pour ce joueur à cette date
         $req = $this->pdo->prepare("
-            UPDATE contact
-            SET notes_perso = :notes_perso
-            WHERE Id_Commentaire = :$c->getIdCommentaire() 
+            UPDATE Commentaire 
+            SET notes_perso = :notes 
+            WHERE Id_Joueur = :idJ AND date_comm = :dateC
         ");
         $req->execute([
-            'notes_perso' =>$notes_perso,
-            'Id_Commentaire' =>$c->getIdCommentaire()
+            'notes' => $notes,
+            'idJ'   => $idJoueur,
+            'dateC' => $date
         ]);
-}
+    }
+
 
     public function delete(Commentaire $c){
         $sup = $this->pdo->prepare("delete from Commentaire where Id_Commentaire = :Id_Commentaire");

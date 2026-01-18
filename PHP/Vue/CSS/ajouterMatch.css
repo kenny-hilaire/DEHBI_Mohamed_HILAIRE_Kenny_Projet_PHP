@@ -1,0 +1,90 @@
+/* Style général de la page */
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+}
+
+/* Le conteneur du formulaire */
+.form-ajout {
+    max-width: 500px;
+    margin: 40px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    border-top: 6px solid #552583; /* Violet Lakers */
+}
+
+.form-title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #552583;
+    text-transform: uppercase;
+    display: block;
+    text-align: center;
+}
+
+.form-ajout label {
+    font-weight: 600;
+    display: block;
+    margin-top: 15px;
+    color: #121212;
+}
+
+.form-ajout input {
+    width: 100%;
+    padding: 12px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-sizing: border-box; /* Crucial pour l'alignement */
+}
+
+/* --- LES BOUTONS (Ciblés par classes) --- */
+
+.btn-submit-ajout {
+    background-color: #FDB927 !important; /* Or Lakers */
+    color: #121212 !important;
+    border: none !important;
+    padding: 15px !important;
+    border-radius: 8px !important;
+    font-weight: 800 !important;
+    text-transform: uppercase !important;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 20px;
+    transition: 0.3s;
+}
+
+.btn-submit-ajout:hover {
+    background-color: #552583 !important;
+    color: white !important;
+}
+
+.btn-reset {
+    background-color: #eee !important;
+    color: #333 !important;
+    border: 1px solid #ccc !important;
+    width: 48% !important;
+    cursor: pointer;
+    padding: 10px !important;
+    margin-top: 10px !important;
+}
+
+.btn-home {
+    background-color: white !important;
+    color: #552583 !important;
+    border: 2px solid #552583 !important;
+    width: 48% !important;
+    padding: 10px !important;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 10px !important;
+}
+
+.form-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}

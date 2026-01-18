@@ -1,7 +1,14 @@
 <?php
-require_once '../Modele/connexionBD.php';
-require_once '../Modele/DaoJoueur.php';
-require_once '../Modele/Joueur.php';
+session_start();
+
+// Si la variable 'auth' n'existe pas ou n'est pas vraie, on dégage l'intrus
+if (!isset($_SESSION['auth']) || $_SESSION['auth'] !== true) {
+    header("Location: Connexion.php");
+    exit();
+}
+require_once '../modele/connexionBD.php';
+require_once '../modele/DaoJoueur.php';
+require_once '../modele/Joueur.php';
 
 $connectionBD = new ConnectionBD();
 $pdo = $connectionBD->getConnection();
@@ -48,7 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $erreur = "⚠️ Le poids doit être compris entre 40 kg et 180 kg.";
         } else {
             // Vérifier si l'ID existe déjà
-            $check = $pdo->prepare("SELECT 1 FROM joueur WHERE Id_Joueur = ?");
+            $check = $pdo->prepare("SELECT 1 FROM Joueur WHERE Id_Joueur = ?");
             $check->execute([$valeurs["Id_joueur"]]);
             if ($check->fetch()) {
                 $erreur = "⚠️ Cet ID joueur existe déjà.";
@@ -67,7 +74,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $dao = new JoueurDAO();
                 $dao->insert($joueur);
 
-                header("Location: afficher_joueurs.php");
+                header("Location:afficher_joueurs.php");
                 exit;
             }
         }
@@ -85,14 +92,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <link rel="stylesheet" href="CSS/ajouterJoueur.css">
 </head>
 <body>
-
-<nav>
-    <ul>
-        <li><a href="menuPrincipale.php">Menu</a></li>
-        <li><a href="afficher_joueurs.php">Joueurs</a></li>
-    </ul>
-</nav>
-
+    <?php include 'nav.php'; ?>
 <h1>Ajouter un joueur</h1>
 
 <div class="form-container">
@@ -146,6 +146,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <a href="afficher_joueurs.php">Retour à la liste</a>
     <a href="menuPrincipale.php">Retour à l'accueil</a>
 </div>
+<?php include 'footer.php'; ?>
 
 </body>
 </html>

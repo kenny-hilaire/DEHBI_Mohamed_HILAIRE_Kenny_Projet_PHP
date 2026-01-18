@@ -32,13 +32,15 @@ class Fonction_utiles {
     }
 
     // ------------------- % de match gagné -------------------
-    public function nombre_victoire(): int {
+
+    public function nombre_victoire(): float {
         $total = $this->pdo->query("SELECT COUNT(*) FROM Match_")->fetchColumn();
-        if ($total == 0) return 0;
+        if ($total == 0) return 0.0;
 
         $sql = "SELECT count(*) FROM Match_ WHERE resultat = 'victoire'";
         $victoires = $this->pdo->query($sql)->fetchColumn();
 
+        // round(..., 2) retourne un float, ce qui est maintenant cohérent
         return round(($victoires / $total) * 100, 2);
     }
 

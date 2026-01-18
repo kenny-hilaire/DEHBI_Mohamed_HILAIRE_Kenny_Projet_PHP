@@ -1,164 +1,116 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* --- Mise en page du contenu principal --- */
+/* On cible le formulaire qui contient le tableau pour l'isoler */
+form[method="POST"] {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 20px auto;
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
-
-body {
-    margin: 0;
-    background-color: #f4f6f9;
-    color: #333;
-}
-
-main {
-    padding: 20px;
-}
-
-h1 {
-    text-align: center;
-    margin: 30px 0;
-    font-weight: 700;
-}
-
-nav {
-    background-color: #121212;
-    padding: 12px 0;
-    margin: 0;
-    border-radius: 0;
-}
-
-nav ul {
-    list-style: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 28px;
-    padding: 0;
-    margin: 0;
-}
-
-nav a {
-    text-decoration: none;
-    color: #ffffff;
-    font-weight: 600;
-    transition: color 0.2s ease;
-}
-
-nav a:hover {
-    color: #FDB927;
-}
-
-nav input[type="submit"] {
-    background: #552583;
-    color: white;
-    border: none;
-    padding: 6px 14px;
-    border-radius: 999px;
-    cursor: pointer;
-    font-weight: 600;
-}
-
-
-form {
-    margin-top: 20px;
-}
-
-table {
-    width: 100%;
-    max-width: 1100px;
-    margin: auto;
-    border-collapse: collapse;
+/* --- Style du Tableau --- */
+/* On force le style pour écraser l'attribut border="1" du HTML */
+table[width="900"] {
+    width: 100% !important; /* Pour qu'il soit responsive */
+    max-width: 1150px;
+    margin: 0 auto;
+    border-collapse: collapse !important;
     background-color: #ffffff;
-    border-radius: 8px;
+    border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border: none !important; /* On enlève la bordure noire moche */
 }
 
-th {
-    background-color: #2563eb;
+/* En-tête du tableau (Bleu pro) */
+table[width="900"] th {
+    background-color: #2563eb; /* Bleu comme sur ta capture */
     color: white;
+    padding: 15px;
+    text-align: center;
+    font-size: 14px;
+    text-transform: uppercase;
+    border: none !important;
+}
+
+/* Cellules du tableau */
+table[width="900"] td {
     padding: 12px;
     text-align: center;
-    font-size: 14px;
-}
-
-td {
-    padding: 10px;
-    text-align: center;
     border-bottom: 1px solid #e5e7eb;
+    border-left: none !important;
+    border-right: none !important;
     font-size: 14px;
+    color: #444;
 }
 
-tr:nth-child(even) {
+table[width="900"] tr:nth-child(even) {
     background-color: #f8fafc;
 }
 
-tr:hover {
-    background-color: #eef2ff;
+table[width="900"] tr:hover {
+    background-color: #f1f5f9;
 }
 
-td a {
+/* --- Liens d'action (Modifier / Supprimer) --- */
+table[width="900"] td a {
     text-decoration: none;
-    font-weight: 500;
-    margin: 0 5px;
+    font-weight: 600;
+    margin: 0 8px;
+    display: inline-block;
 }
 
-td a:first-child {
-    color: #2563eb;
+/* Lien Modifier */
+table[width="900"] td a[href*="modifier"] {
+    color: #f59e0b; /* Orange/Ambre */
 }
 
-td a:first-child:hover {
+/* Lien Supprimer */
+table[width="900"] td a[href*="Supprimer"] {
+    color: #dc2626; /* Rouge */
+}
+
+table[width="900"] td a:hover {
     text-decoration: underline;
 }
 
-td a:last-child {
-    color: #dc2626;
-}
-
-td a:last-child:hover {
-    text-decoration: underline;
-}
-
-form > input[type="submit"] {
-    margin-top: 20px;
-    padding: 10px 18px;
-    border-radius: 6px;
+/* --- Boutons de validation (en bas du formulaire) --- */
+/* On cible précisément les inputs de type submit du formulaire */
+form[method="POST"] > input[type="submit"] {
+    padding: 12px 24px;
+    border-radius: 8px;
     border: none;
     font-size: 14px;
     cursor: pointer;
-    font-weight: 500;
+    font-weight: 600;
+    transition: 0.3s;
+    margin-top: 10px;
     margin-right: 10px;
 }
 
-form > input[value="Ajouter un joueur"] {
+/* Bouton Ajouter (Vert) */
+form[method="POST"] > input[value="Ajouter un joueur"] {
     background-color: #22c55e;
     color: white;
 }
 
-form > input[value="Ajouter un joueur"]:hover {
+form[method="POST"] > input[value="Ajouter un joueur"]:hover {
     background-color: #16a34a;
 }
 
-form > input[value="retour au menu"] {
+/* Bouton Retour (Gris) */
+form[method="POST"] > input[value="retour au menu"] {
     background-color: #64748b;
     color: white;
 }
 
-form > input[value="retour au menu"]:hover {
+form[method="POST"] > input[value="retour au menu"]:hover {
     background-color: #475569;
 }
 
-@media (max-width: 900px) {
-    table, thead, tbody, th, td, tr {
-        font-size: 12px;
-    }
-
-    nav ul {
-        flex-wrap: wrap;
-        gap: 10px;
-        justify-content: center;
+/* --- Responsive --- */
+@media (max-width: 950px) {
+    table[width="900"] {
+        display: block;
+        overflow-x: auto;
     }
 }
-

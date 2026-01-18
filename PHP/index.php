@@ -4,14 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestion d'une équipe de sport</title>
-    <link rel="stylesheet" href="/PROJET_PHP/PHP/Vue/CSS/index.css">
+    <link rel="stylesheet" href="Vue/CSS/index.css">
 </head>
 <body>
 
 <header>
-    <nav>
-        <a href="#"><img src="/PROJET_PHP/PHP/Vue/PHOTO/téléchargement-removebg-preview.png" alt="Logo" class="logo"></a>
-    </nav>
 </header>
 
 <section class="Introduction">
@@ -22,7 +19,7 @@
         <li>Optimisez votre stratégie match après match</li>
         <li>Votre équipe, vos choix, vos victoires</li>
     </ul>
-    <form action="Connexion.php">
+    <form action="Vue/Connexion.php">
         <button type="submit" class="btn">Connexion</button>
     </form>
 </section>

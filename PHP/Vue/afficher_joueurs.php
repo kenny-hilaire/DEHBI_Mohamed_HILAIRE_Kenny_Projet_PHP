@@ -1,5 +1,11 @@
-
 <?php
+session_start();
+
+// Si la variable 'auth' n'existe pas ou n'est pas vraie, on dégage l'intrus
+if (!isset($_SESSION['auth']) || $_SESSION['auth'] !== true) {
+    header("Location: Connexion.php");
+    exit();
+}
 require_once '../modele/DaoJoueur.php';
 
 /* Gestion des actions du formulaire */
@@ -33,16 +39,7 @@ $joueurs = $daoJoueur->obtenirTous();
     <link rel="stylesheet" href="CSS/afficher_joueurs.css">
 </head>
 <body>
-
-<nav>
-    <ul>
-        <li><a href="menuPrincipale.php">Accueil</a></li>
-        <li><a href="afficher_matches.php">🏀 Liste de match</a></li>
-        <li><a href="afficher_joueurs.php">👤 Joueurs</a></li>
-        <li><a href="statistique.php">📊 Statistique</a></li>
-    </ul>
-</nav>
-
+<?php include 'nav.php'; ?>
 <form method="POST">
 
 <table border="1" width="900">
@@ -85,6 +82,7 @@ $joueurs = $daoJoueur->obtenirTous();
 <input type="submit" name="action" value="retour au menu">
 
 </form>
+<?php include 'footer.php'; ?>
 
 </body>
 </html>

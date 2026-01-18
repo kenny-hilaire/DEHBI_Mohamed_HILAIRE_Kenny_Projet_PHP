@@ -10,7 +10,7 @@ class Match_ {
     public function __construct(string $id_match, string $date_match, string $heure_match, string $nom_adversaire, ?string $resultat, string $lieu_rencontre) {
         $this->Id_Match = $id_match;
         $this->date_Match = $date_match;
-        $this->Heure_Match = $heure_match; // Corrigé : ajout du $
+        $this->Heure_Match = $heure_match; 
         $this->Nom_adversaire = $nom_adversaire;
         $this->resultat = $resultat;
         $this->lieu_rencontre = $lieu_rencontre;

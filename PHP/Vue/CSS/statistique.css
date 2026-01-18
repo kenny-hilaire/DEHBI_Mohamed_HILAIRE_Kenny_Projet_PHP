@@ -1,0 +1,103 @@
+/* --- Mise en page générale --- */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+    color: #552583; /* Violet Lakers */
+    font-weight: 800;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+}
+
+/* --- Sections (Containers) --- */
+section {
+    max-width: 1100px;
+    margin: 20px auto;
+    padding: 25px;
+    background: #fff;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    border-radius: 12px;
+}
+
+/* --- Section Titre --- */
+#title {
+    background: transparent;
+    box-shadow: none;
+    border: none;
+}
+
+/* --- Grille des statistiques globales --- */
+#Global_Stats {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
+    border: none;
+}
+
+.percent {
+    background: #fff;
+    border-left: 5px solid #FDB927; /* Or Lakers */
+    padding: 15px 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    flex: 1;
+    min-width: 200px;
+    text-align: center;
+}
+
+.percent h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #444;
+}
+
+/* --- Tableau de Performance --- */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+thead {
+    background-color: #552583;
+    color: white;
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+}
+
+th {
+    font-weight: 600;
+}
+
+tr:hover {
+    background-color: #f9f6ff;
+}
+
+tr:nth-child(even) {
+    background-color: #fafafa;
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+    #Global_Stats {
+        flex-direction: column;
+    }
+    
+    table {
+        display: block;
+        overflow-x: auto;
+    }
+}

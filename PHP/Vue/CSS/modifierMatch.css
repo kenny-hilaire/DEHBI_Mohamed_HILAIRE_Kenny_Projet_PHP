@@ -1,0 +1,78 @@
+/* On ne touche pas au body pour ne pas casser le reste */
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+h2 {
+    text-align: center;
+    color: #552583;
+    text-transform: uppercase;
+    margin-top: 30px;
+}
+
+/* On cible UNIQUEMENT les éléments dans .form-container */
+.form-container {
+    max-width: 500px;
+    margin: 20px auto 50px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    border-top: 6px solid #552583;
+}
+
+.form-container p {
+    margin-bottom: 15px;
+}
+
+.form-container label {
+    font-weight: bold;
+    color: #333;
+}
+
+.form-container input, 
+.form-container select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box; /* Pour que ça ne dépasse pas */
+}
+
+/* Style spécifique pour les champs grisés */
+.input-disabled {
+    background-color: #eee;
+    cursor: not-allowed;
+    color: #777;
+}
+
+/* LE BOUTON JAUNE : Uniquement pour cette classe */
+.btn-form-submit {
+    display: block;
+    width: 100%;
+    background-color: #FDB927; /* Or Lakers */
+    color: #121212;
+    border: none;
+    padding: 15px;
+    border-radius: 8px;
+    font-weight: 800;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-form-submit:hover {
+    background-color: #552583;
+    color: white;
+}
+
+.link-annuler {
+    text-decoration: none;
+    color: #666;
+    font-weight: bold;
+}
+
+.link-annuler:hover {
+    color: #c62828;
+}

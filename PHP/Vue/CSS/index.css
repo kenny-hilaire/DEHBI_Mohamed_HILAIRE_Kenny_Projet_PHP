@@ -1,4 +1,4 @@
-/* Reset global */
+/* Reset global selon la vidéo */
 *, *::before, *::after {
     margin: 0;
     padding: 0;
@@ -6,111 +6,96 @@
 }
 
 body {
-    font-family: 'Tw Cen', Arial, sans-serif;
-    font-size: 16px;
+    font-family: 'Tw Cen', Arial, sans-serif; /* Conservation de ta police */
     color: #fff;
     background-color: #000;
     min-height: 100vh;
-    position: relative;
+    overflow: hidden; /* Évite le scroll inutile sur l'accueil */
 }
 
-/* Overlay image de fond */
+/* Overlay image de fond - Effet plein écran de la vidéo */
 .overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: url("/PROJET_PHP/PHP/Vue/PHOTO/basketball.avif") center center no-repeat;
+    background: url("../PHOTO/basketball.avif") center center no-repeat;
     background-size: cover;
     z-index: -1;
-    filter: brightness(0.4);
+    filter: brightness(0.4); /* Assombrit pour faire ressortir le texte */
 }
 
-/* Header / Nav */
-header {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px 40px;
-}
-
-nav {
-    display: flex;
-    justify-content: flex-start; /* on garde le logo à gauche */
-    align-items: center;
-    padding: 30px 0 10px;
-    width: 100%;
-}
-
-nav .logo-container {
-    background-color: rgba(255, 255, 255, 0.8); /* fond blanc semi-transparent */
-    padding: 10px 15px; /* espace autour du logo */
-    border-radius: 15px; /* arrondi pour que ce soit joli */
-    display: inline-block;
-}
-
-nav .logo {
-    width: 170px;
-    display: block;
-}
-
-
-/* Section introduction */
+/* Section Introduction - Centrage vertical et horizontal */
 .Introduction {
-    max-width: 900px;
-    margin: 120px auto 50px;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     text-align: center;
     padding: 0 20px;
 }
 
+/* Typographie du titre et effet Typed.js */
 .Introduction h1 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-    line-height: 1.2;
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    font-weight: 800;
+    text-transform: uppercase;
 }
 
 .auto-typing {
-    color: #ffcc00;
+    color: #FDB927; /* Or Lakers pour l'effet de saisie */
     font-weight: bold;
 }
 
-/* Liste des points */
+/* Liste des points - Style épuré */
 .Introduction ul {
     list-style: none;
-    font-size: 1.2rem;
-    margin: 20px 0;
+    font-size: 1.3rem;
+    margin: 20px 0 40px;
+    max-width: 700px;
 }
 
 .Introduction ul li {
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+    opacity: 0.9;
 }
 
-/* Bouton Connexion */
-.Introduction form button.btn {
+/* Bouton de Connexion - Style "CTA" (Call to Action) */
+.Introduction form button {
     font-size: 1.2rem;
-    padding: 12px 25px;
-    border: 2px solid #ffcc00;
-    background-color: transparent;
-    color: #ffcc00;
+    padding: 15px 40px;
+    background-color: #552583; /* Violet Lakers */
+    color: #FDB927; /* Or Lakers */
+    border: 2px solid #552583;
     cursor: pointer;
+    font-weight: 800;
+    text-transform: uppercase;
+    border-radius: 50px; /* Bord arrondi style moderne */
     transition: all 0.3s ease;
-    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
-.Introduction form button.btn:hover {
-    background-color: #ffcc00;
-    color: #000;
+.Introduction form button:hover {
+    background-color: transparent;
+    color: #fff;
+    border-color: #fff;
+    transform: scale(1.05);
 }
 
 /* Responsive */
 @media (max-width: 768px) {
     .Introduction h1 {
-        font-size: 2rem;
+        font-size: 2.2rem;
     }
     .Introduction ul {
-        font-size: 1rem;
+        font-size: 1.1rem;
     }
-    nav .logo {
-        width: 120px;
+    .Introduction form button {
+        padding: 12px 30px;
+        font-size: 1rem;
     }
 }

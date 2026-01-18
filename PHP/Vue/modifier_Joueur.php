@@ -1,7 +1,14 @@
 <?php
-require_once '../Modele/connexionBD.php';
-require_once '../Modele/DaoJoueur.php';
-require_once '../Modele/Joueur.php';
+session_start();
+
+// Si la variable 'auth' n'existe pas ou n'est pas vraie, on dégage l'intrus
+if (!isset($_SESSION['auth']) || $_SESSION['auth'] !== true) {
+    header("Location: Connexion.php");
+    exit();
+}
+require_once '../modele/connexionBD.php';
+require_once '../modele/DaoJoueur.php';
+require_once '../modele/Joueur.php';
 
 $dao = new JoueurDAO();             
 
@@ -10,7 +17,7 @@ if (!$id) {
     die("Joueur introuvable");
 }
 
-$joueurData = $dao->select(new Joueur($id, '', '', '', '', 0, 0, '', ''));
+$joueurData = $dao->findByID(new Joueur($id, '', '', '', '', 0, 0, '', ''));
 if (!$joueurData) {
     die("Joueur non trouvé");
 }
@@ -73,13 +80,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <link rel="stylesheet" href="CSS/ajouterJoueur.css">
 </head>
 <body>
-
-<nav>
-    <ul>
-        <li><a href="menuPrincipale.php">Menu</a></li>
-        <li><a href="afficher_joueurs.php">Joueurs</a></li>
-    </ul>
-</nav>
+<?php include 'nav.php'; ?>
 
 <h1>Modifier le joueur</h1>
 
@@ -133,6 +134,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <a href="afficher_joueurs.php">Retour à la liste</a>
     <a href="menuPrincipale.php">Retour à l'accueil</a>
 </div>
+<?php include 'footer.php'; ?>
 
 </body>
 </html>

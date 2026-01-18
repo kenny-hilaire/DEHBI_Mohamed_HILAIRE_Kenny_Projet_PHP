@@ -27,26 +27,39 @@ class MatchDAO {
         ]);
     }
 
-    public function updateInfo(Match_ $m, string $dateMatch, string $heureMatch){
-        $req = $this->pdo->prepare("
-            UPDATE Match_
-            SET DATE_ = :DATE_, HEURE = :HEURE
-            WHERE Id_Match = :Id_Match
-        ");
+   public function updateInfo(Match_ $m, string $dateMatch, string $heureMatch, string $resultat) {
+    $req = $this->pdo->prepare("
+        UPDATE Match_
+        SET DATE_ = :DATE_, HEURE = :HEURE, resultat = :res
+        WHERE Id_Match = :Id_Match
+    ");
 
-        $req->execute([
-            ':Id_Match' => $m->getId_Match(),
-            ':DATE_' => $dateMatch,
-            ':HEURE' => $heureMatch
-        ]);
-    }
+    $req->execute([
+        ':Id_Match' => $m->getId_Match(),
+        ':DATE_' => $dateMatch,
+        ':HEURE' => $heureMatch,
+        ':res'   => $resultat
+    ]);
+}
 
-    public function delete(string $idMatch){
-        $req = $this->pdo->prepare("DELETE FROM Match_ WHERE Id_Match = :Id_Match");
-        $req->execute([
-            ':Id_Match' => $idMatch
-        ]);
+   public function delete(string $idMatch) {
+    try {
+        $this->pdo->beginTransaction(); // On commence une transaction pour être sûr
+
+        // 1. Supprimer les lignes dans Participe liées à ce match
+        $reqParticipe = $this->pdo->prepare("DELETE FROM Participe WHERE Id_Match = :idM");
+        $reqParticipe->execute([':idM' => $idMatch]);
+
+        // 2. Supprimer le match lui-même
+        $reqMatch = $this->pdo->prepare("DELETE FROM Match_ WHERE Id_Match = :idM");
+        $reqMatch->execute([':idM' => $idMatch]);
+
+        $this->pdo->commit(); // On valide les deux suppressions
+    } catch (Exception $e) {
+        $this->pdo->rollBack(); // En cas d'erreur, on annule tout
+        throw $e;
     }
+}
 
     public function findById(string $idMatch){
         $req = $this->pdo->prepare("SELECT * FROM Match_ WHERE Id_Match = :Id_Match");

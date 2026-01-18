@@ -13,7 +13,7 @@ class JoueurDAO {
     public function insert(Joueur $j) {
 
         $sql = "
-            INSERT INTO joueur
+            INSERT INTO Joueur
             (Id_Joueur, nom, prenom, numero_licence, date_naissance, taille, poids, statut, poste_preferer)
             VALUES
             (:id, :nom, :prenom, :licence, :date_naissance, :taille, :poids, :statut, :poste)
@@ -36,7 +36,7 @@ class JoueurDAO {
 
     public function updateInfo(Joueur $joueur, String $nouveauStatut, String $nouveauPostePref, float $nouvelleTaille, float $nouveauPoids ){
             $req = $this->pdo->prepare("
-                UPDATE joueur
+                UPDATE Joueur
                 SET statut = :nouveauStatut, poste_preferer = :nouveauPostePref, taille = :nouvelleTaille, poids = :nouveauPoids
                 WHERE Id_Joueur = :Id_Joueur
             ");
@@ -51,7 +51,7 @@ class JoueurDAO {
 
     public function delete(String $idJoueur) {
         $req = $this->pdo->prepare(
-            "DELETE FROM joueur WHERE Id_Joueur = :id"
+            "DELETE FROM    Joueur WHERE Id_Joueur = :id"
         );
         $req->execute([
             'id' => $idJoueur
@@ -61,7 +61,7 @@ class JoueurDAO {
     public function findByID(Joueur $joueur){
         $sup = $this->pdo->prepare("select * from Joueur where Id_Joueur = :Id_Joueur");
     $sup -> execute([
-	':Id_Joueur' => $joueur->getId_Joueur]);
+	':Id_Joueur' => $joueur->getId_Joueur()]);
         return $sup->fetchAll(PDO::FETCH_ASSOC);
     }
     public function findByNom(string $nom){

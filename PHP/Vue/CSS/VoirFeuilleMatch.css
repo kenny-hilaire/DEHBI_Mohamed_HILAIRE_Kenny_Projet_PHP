@@ -1,0 +1,128 @@
+/* =================================================== */
+/* STYLES DE LA PAGE (Tableaux et Titres)              */
+/* =================================================== */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #121212;
+}
+
+h2 {
+    text-align: center;
+    color: #552583; /* Violet Lakers */
+    font-weight: 800;
+    text-transform: uppercase;
+    margin-top: 30px;
+    letter-spacing: 2px;
+}
+
+h3 {
+    color: #121212;
+    border-left: 6px solid #FDB927; /* Or Lakers */
+    padding-left: 15px;
+    margin: 40px auto 15px auto;
+    max-width: 1100px;
+    text-transform: uppercase;
+}
+
+/* On force le style du tableau pour écraser le border="1" */
+table {
+    width: 95%;
+    max-width: 1100px;
+    margin: 10px auto 30px auto;
+    border-collapse: collapse;
+    background: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border: none !important; 
+}
+
+thead {
+    background-color: #552583;
+    color: #ffffff;
+}
+
+th {
+    padding: 15px;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+}
+
+td {
+    padding: 12px 15px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+}
+
+tr:hover {
+    background-color: #fdfaf0;
+}
+
+/* Inputs et Selects */
+select, input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+/* Bouton de mise à jour */
+button[type="submit"] {
+    display: block;
+    margin: 40px auto 20px auto;
+    background-color: #FDB927;
+    color: #121212;
+    border: none;
+    padding: 15px 45px;
+    border-radius: 50px;
+    font-weight: 800;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button[type="submit"]:hover {
+    background-color: #552583;
+    color: #ffffff;
+}
+
+/* =================================================== */
+/* STYLES DU FOOTER (Sans toucher au PHP)              */
+/* =================================================== */
+footer {
+    background-color: #121212; /* Fond noir comme la nav */
+    color: #ffffff;
+    padding: 40px 20px;
+    margin-top: 60px;
+    text-align: center;
+    border-top: 4px solid #552583; /* Rappel violet */
+}
+
+footer p {
+    margin: 10px 0;
+    font-size: 0.9rem;
+}
+
+footer strong {
+    color: #FDB927; /* Club en Or */
+}
+
+footer a {
+    color: #ffffff;
+    text-decoration: none;
+    margin: 0 10px;
+    font-weight: 600;
+    transition: color 0.2s;
+}
+
+footer a:hover {
+    color: #FDB927;
+}
+
+footer hr {
+    display: none; /* On cache la barre moche <hr> pour utiliser le style CSS */
+}

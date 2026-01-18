@@ -4,24 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestion d'une équipe de sport</title>
-    <link rel="stylesheet" href="CSS/statistiques.css">
+    <link rel="stylesheet" href="CSS/statistique.css">
 </head>
 <body>
-     <nav>
-        <ul>
-            <li><a href="menuPrincipale.php">Accueil</a></li>
-            <li><a href="afficher_matches.php">🏀Liste de match</a></li>
-            <li><a href ="afficher_joueurs.php">👤Joueur</a></li>
-            <li><a href ="statistique.php">📊Statistique</a></li>
-            <li>
-                <input type="submit" name="Deconnexion" value="Deconnexion">  
-            </li>  
-        </ul>
-    </nav>
-
+    <?php include 'nav.php'; ?>
     <section id="title">
         <h1>Bilan de la Saison</h1><br>
+
         <?php
+        session_start();
+
+        // Si la variable 'auth' n'existe pas ou n'est pas vraie, on dégage l'intrus
+        if (!isset($_SESSION['auth']) || $_SESSION['auth'] !== true) {
+            header("Location: Connexion.php");
+            exit();
+        }
         require_once '../modele/DaoJoueur.php'; 
         require_once '../modele/connexionBD.php';
         require_once '../modele/Fonction_utilses.php';
@@ -80,4 +77,6 @@
         </table>
         
     </section>
-        </body>
+        <?php include 'footer.php'; ?>
+    </body>
+</html>

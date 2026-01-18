@@ -3,24 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>Liste des joueurs</title>
-    <link rel="stylesheet" href="afficher_joueurs.css">
+    <link rel="stylesheet" href="CSS/feuilleMatch.css">
 </head>
 <body>
-    <nav>
-        <ul>
-            <li><a href="menuPrincipale.php">Accueil</a></li>
-            <li><a href="afficher_matches.php">🏀Liste de match</a></li>
-            <li><a href="afficher_joueurs.php">👤Joueur</a></li>
-            <li><a href="statistique.php">📊Statistique</a></li>
-            <li>
-                <form action="deconnexion.php" method="POST" style="display:inline;">
-                    <input type="submit" name="Deconnexion" value="Deconnexion">
-                </form>
-            </li>  
-        </ul>
-    </nav>
-
+   <?php include 'nav.php'; ?>
     <?php
+    session_start();
+
+    // Si la variable 'auth' n'existe pas ou n'est pas vraie, on dégage l'intrus
+    if (!isset($_SESSION['auth']) || $_SESSION['auth'] !== true) {
+        header("Location: Connexion.php");
+        exit();
+    }
     require_once '../modele/connexionBD.php';
     require_once '../modele/DaoMatch.php'; 
     require_once '../modele/DaoJoueur.php';
@@ -250,5 +244,7 @@
         <input type="hidden" name="id_match" value="<?= htmlspecialchars($idMatch) ?>">
         <button type="submit" id="btn-valider" name="btn_valider">Valider la feuille</button>
     </form>
+    <?php include 'footer.php'; ?>
+
 </body>
 </html>
