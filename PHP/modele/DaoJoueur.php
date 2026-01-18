@@ -52,13 +52,21 @@ public function updateInfo(Joueur $joueur, String $nouveauStatut, String $nouvea
 	':Id_Joueur' => $joueur->getId_Joueur]);
     }
 
+    public function findByID(Joueur $joueur){
+        $sup = $this->pdo->prepare("select * from Joueur where Id_Joueur = :Id_Joueur");
+    $sup -> execute([
+	':Id_Joueur' => $joueur->getId_Joueur]);
+        return $sup->fetchAll(PDO::FETCH_ASSOC);
 
-    public function select(Joueur $j){
-         $req = $this->pdo->prepare("select * from Joueur where Id_Joueur = :Id_Joueur ;");
-		$req ->execute(['Id_Joueur' => $j->getId_Joueur]);
-    return $req->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function findByNom(Joueur $joueur){
+        $sup = $this->pdo->prepare("select * from Joueur where nom = :nom");
+        $sup -> execute([
+        ':nom' => $nom]);
+        return $sup->fetchAll(PDO::FETCH_ASSOC);
+
+    }
 
     public function obtenirTous() {
         $req = $this->pdo->query('SELECT * FROM Joueur ORDER BY nom, prenom');

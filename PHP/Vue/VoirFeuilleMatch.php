@@ -31,16 +31,19 @@
             </tr>
         </thead>
         <tbody>
+            <?php
+            for ($i = 0; $i < 5; $i++){?>
             <tr>
                 <td>
                 <select name="nomTitu" class="select-joueur">
                     <option value="">-- Nom --</option>
-                    <?php foreach ($joueurs as $j): ?>
+                    <?php foreach ($Joueur as $j): ?>
                         <option value="<?= $j['nom'] ?>"><?= htmlspecialchars($j['nom']) ?></option>
                     <?php endforeach; ?>
                 </select>
                     </td>
             </tr>
+            <?php }?>
         </tbody>
         
     </table>
@@ -59,16 +62,36 @@
             </tr>
         </thead>
         <tbody>
+            <?php 
+            for ($t =0; $t <7; $t++){ ?>
             <tr>
                 <td>
-                <select name="nomTitu" class="select-joueur">
-                    <option value="">-- Nom --</option>
-                    <?php foreach ($joueurs as $j): ?>
-                        <option value="<?= $j['nom'] ?>"><?= htmlspecialchars($j['nom']) ?></option>
+                    <select name="nomRempl[]" class="select-joueur" onchange="this.form.submit()">
+                        <option value="">-- Nom --</option>
+                        <?php foreach ($Joueur as $j): ?>
+                            <option value="<?= $j['nom'] ?>"><?= htmlspecialchars($j['nom']) ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </td>
+                <?php 
+                    $infosJoueur = null;
+                if (!empty($joueurSelectionne[$t])) {
+                    $infosJoueur = $daoJoueur->findByNom($joueurSelectionne[$t]);
+                }?>
+
+                <td><?= htmlspecialchars($infosJoueur['prenom']) ?></td>
+                <td>
+                    <select name="poste" class="select-joueur">
+                    <option value="">-- Poste --</option>
+                    <?php foreach ($Joueur as $j): ?>
+                        <option value="<?= $j['poste_preferer'] ?>"><?= htmlspecialchars($j['poste_preferer']) ?></option>
                     <?php endforeach; ?>
-                </select>
-                    </td>
-            </tr>
+                    </select>
+                </td>
+            <td><?= htmlspecialchars($infosJoueur['taille']) ?></td>
+            <td><?php $j['poids']; ?></td>
+        </tr>
+        <?php } ?>
         </tbody>
         
     </table>
